@@ -2,7 +2,7 @@ import { NavLink, Link } from 'react-router-dom'
 
 const Index = () => {
     return (
-        <header className='border-b border-l-slate-500/15 bg-black'>
+        <header className='border-b border-l-slate-500/15'>
             <nav className='w-[90%] flex items-center justify-between mx-auto py-5'>
             <div className="flex items-center gap-5" >
                 <div className='h-10 w-10 flex items-center justify-center rounded-full bg-purple-950 text-zinc-100'>
