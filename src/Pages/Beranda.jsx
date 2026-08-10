@@ -1,12 +1,13 @@
 import React from 'react'
 import Index from '../components/HeroRole/Index'
-import { FaGithub, FaTiktok, FaInstagram } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
+import { FaGithub, FaTiktok, FaInstagram, FaCode } from "react-icons/fa";
+import { MdEmail, MdOutlineRocketLaunch } from "react-icons/md";
+import { LuSparkles, LuGraduationCap } from 'react-icons/lu';
 
 const Beranda = () => {
   return (
     <>
- // Hero
+ {/*  Hero */}
       <div className="w-[90%] mx-auto p-10 mt-10 flex justify-between items-stars">
         <div className='space-y-5 flex-1'>
           <div className="bg-linear-to-r bg-white/5  border border-slate-500/15 inline-flex items-center  text-gray-500 font-normal text-2x1 rounded-full gap-2 px-5 py-2.5">
@@ -45,12 +46,129 @@ const Beranda = () => {
             Samarinda, Indonesia
           </p>
         </div>
+      </div>
+
+      {/* About */}
+      <div className="mt-20 flex flex-col items-center text-center">
+
+        {/* Badge */}
+        <div className="inline-flex items-center rounded-full border border-blue-500/40 bg-blue-500/5 px-5 py-2 text-sm font-medium uppercase tracking-widest text-blue-500">
+          About Me
         </div>
 
-        {/* Tentang */}
-        <div className="mt-3 flex flex-1 flex-center gap-2 rounded-full border-slate-800/15 bg-white/5 px-5 py-2.5 text-2xl font-normal text-blue-900">
-          About
+        {/* Judul */}
+        <h2 className="mt-6 max-w-3xl text-5xl font-bold leading-tight text-white">
+          Passionate about
+          <br />
+          building great sofewaree
+        </h2>
+
+        {/* Container Card 1 + Card-card kecil */}
+        <div className="flex w-full gap-6 items-start">
+
+          {/* Card 1 */}
+          <div className="mt-15 ml-8 w-1/3 rounded-2xl border border-slate-700 bg-slate-800 p-20 text-left">
+            <p className="text-xl font-normal text-slate-400">
+              I'am a{" "}
+              <span className="font-bold text-white">
+                Full Stack Web Developer
+              </span>{" "}
+              passionate about web and mobile development. I love turning complex
+              problems into simple, beautiful, and intuitive applications.
+            </p>
+
+            <p className="mt-3 text-xl font-normal text-slate-400">
+              I'm always learning new technologies and enjoy building modern
+              applications with thoughtful UI/UX. Whether it's a Laravel-powered
+              platform, a React web app, or a Flutter mobile experience — I care
+              about the details that make products feel premium.
+            </p>
+          </div>
+
+          {/* Card-card kecil */}
+          <div className="grid flex-1 grid-cols-2 gap-6">
+
+            {/* Card 2 */}
+            <div className="mt-15 ml-5 rounded-2xl border border-slate-700 bg-slate-800 p-8 text-left">
+
+             {/* Icons */}
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-blue-500/20">
+                <FaCode className="text-2xl text-blue-500" />
+              </div>
+
+              {/* Judul */}
+              <p className="text-xl font-bold text-white">
+                Full Stack Focus
+              </p>
+
+              {/* Deskripsi */}
+              <p className="mt-3 text-xl font-normal text-slate-400">
+                Comfortable across the stack — React & Tailwind on the front,
+                Laravel & MySQL on the back.
+              </p>
+            </div>
+
+            {/* Card 3 */}
+            <div className="mt-15 rounded-2xl border border-slate-700 bg-slate-800 p-8 text-left">
+
+              {/* Icons */}
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-blue-500/20">
+                <MdOutlineRocketLaunch className="text-2xl text-blue-500" />
+              </div>
+
+              {/* Judul */}
+              <p className="text-xl font-bold text-white">
+                Ship Fast
+              </p>
+
+              {/* Descripsi */}
+              <p className="mt-3 text-xl font-normal text-slate-400">
+                I turn ideas into polished, production-ready products with clean, maintainable code.
+              </p>
+            </div>
+
+            {/* Card 4 */}
+            <div className="ml-5 rounded-2xl border border-slate-700 bg-slate-800 p-8 text-left">
+
+              {/* Icons */}
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-blue-500/20">
+                <LuSparkles className="text-2xl text-blue-500" />
+              </div>
+
+              {/* Judul */}
+              <p className="text-xl font-bold text-white">
+                UI / UX Driven
+              </p>
+
+              {/* Descripsi */}
+              <p className="mt-3 text-xl font-normal text-slate-400">
+                Obsessed with details, micro-interactions, and interfaces that feel effortless.
+              </p>
+            </div>
+
+            {/* Card 5 */}
+            <div className="rounded-2xl border border-slate-700 bg-slate-800 p-8 text-left">
+
+              {/* Icons */}
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-blue-500/20">
+                <LuGraduationCap className="text-2xl text-blue-500" />
+              </div>
+
+              {/* Judul */}
+              <p className="text-xl font-bold text-white">
+                Always Learning
+              </p>
+
+              <p className="mt-3 text-xl font-normal text-slate-400">
+                Continuously exploring new technologies, patterns, and design systems.
+              </p>
+            </div>
+
+          </div>
+
         </div>
+
+      </div>
     </>
   )
 }
