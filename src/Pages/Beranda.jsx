@@ -4,6 +4,8 @@ import { FaGithub, FaTiktok, FaInstagram, FaCode } from "react-icons/fa";
 import { MdEmail, MdOutlineRocketLaunch } from "react-icons/md";
 import { LuSparkles, LuGraduationCap, LuPanelsTopLeft, LuServer, LuWrench } from 'react-icons/lu';
 import { CiMobile2 } from 'react-icons/ci';
+import netubeImage from "../assets/gambar/netube.png";
+import WarungNusantaraImage from "../assets/gambar/WarungNusantara.png";
 
 const Beranda = () => {
   return (
@@ -305,6 +307,118 @@ const Beranda = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Featured Projects */}
+      <div className="mt-20 flex flex-col items-center text-center">
+
+        {/* Badge */}
+        <div className="inline-flex items-center rounded-full border border-blue-500/40 bg-blue-500/5 px-5 py-4 text-sm font-medium uppercase tracking-widest text-blue-500">
+          FEATURED PROJECTS
+        </div>
+
+        {/* Judul */}
+        <h2 className="mt-6 max-w-3xl text-5xl font-bold leading-tight text-white">
+          Work I'm proud of
+        </h2>
+
+        <p className="mt-3 text-xl font-normal text-slate-400">
+          A selection of real projects showcasing full-stack web and mobile development.
+        </p>
+
+        {/* Project Card */}
+        <div className="mt-12 grid w-full grid-cols-2 gap-8 px-8">
+
+          {/* Card 1 */}
+          <div className="rounded-3xl border border-slate-700 bg-slate-800 text-left overflow-hidden">
+
+            {/* Gambar */}
+            <div className="w-full">
+              <img
+                src={netubeImage}
+                alt="Netube Application"
+                className="h-80 w-full object-cover"
+              />
+            </div>
+
+            {/* Isi Card */}
+            <div className="p-8">
+
+              <h3 className="text-2xl font-bold text-white">
+                Netube Application
+              </h3>
+
+              <p className="mt-4 text-lg leading-relaxed text-slate-400">
+                Movie application developed with Flutter featuring authentication, Firebase
+                integration, a responsive interface, and rich movie browsing features.
+              </p>
+
+              {/* Teach */}
+              <div className="mt-6 flex flex-wrap gap-3">
+                <span className="rounded-full border border-blue-500/40 bg-blue-500/5 px-4 py-2 text-sm text-blue-500">
+                  Flutter
+                </span>
+
+                <span className="rounded-full border border-blue-500/40 bg-blue-500/5 px-4 py-2 text-sm text-blue-500">
+                  Firebase
+                </span>
+
+                <span className="rounded-full border border-blue-500/40 bg-blue-500/5 px-4 py-2 text-sm text-blue-500">
+                  Dart
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+          {/* Card 2 */}
+          <div className="rounded-3xl border border-slate-700 bg-slate-800 text-left overflow-hidden">
+
+            {/* Gambar */}
+            <div className="w-full">
+              <img
+                src={WarungNusantaraImage}
+                alt="Warung Nusantara Web"
+                className="h-80 w-full object-cover"
+              />
+            </div>
+
+            {/* Isi Card */}
+            <div className="p-8">
+
+              <h3 className="text-2xl font-bold text-white">
+                Warung Nusantara Web
+              </h3>
+
+              <p className="mt-4 text-lg leading-relaxed text-slate-400">
+                Modern food ordering website built with React featuring a shopping cart, dark mode,
+                responsive design, local storage persistence, category filtering, and a clean UI.
+              </p>
+
+              {/* Teach */}
+              <div className="mt-6 flex flex-wrap gap-3">
+                <span className="rounded-full border border-blue-500/40 bg-blue-500/5 px-4 py-2 text-sm text-blue-500">
+                  React
+                </span>
+
+                <span className="rounded-full border border-blue-500/40 bg-blue-500/5 px-4 py-2 text-sm text-blue-500">
+                  JavaScript
+                </span>
+
+                <span className="rounded-full border border-blue-500/40 bg-blue-500/5 px-4 py-2 text-sm text-blue-500">
+                  CSS
+                </span>
+
+                <span className="rounded-full border border-blue-500/40 bg-blue-500/5 px-4 py-2 text-sm text-blue-500">
+                  Local Storage
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </>
   )
