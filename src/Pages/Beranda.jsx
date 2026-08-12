@@ -2,12 +2,13 @@ import React from 'react'
 import Index from '../components/HeroRole/Index'
 import { FaGithub, FaTiktok, FaInstagram, FaCode } from "react-icons/fa";
 import { MdEmail, MdOutlineRocketLaunch } from "react-icons/md";
-import { LuSparkles, LuGraduationCap } from 'react-icons/lu';
+import { LuSparkles, LuGraduationCap, LuPanelsTopLeft, LuServer, LuWrench } from 'react-icons/lu';
+import { CiMobile2 } from 'react-icons/ci';
 
 const Beranda = () => {
   return (
     <>
- {/*  Hero */}
+      {/*  Hero */}
       <div className="w-[90%] mx-auto p-10 mt-10 flex justify-between items-stars">
         <div className='space-y-5 flex-1'>
           <div className="bg-linear-to-r bg-white/5  border border-slate-500/15 inline-flex items-center  text-gray-500 font-normal text-2x1 rounded-full gap-2 px-5 py-2.5">
@@ -64,7 +65,7 @@ const Beranda = () => {
         </h2>
 
         {/* Container Card 1 + Card-card kecil */}
-        <div className="flex w-full gap-6 items-start">
+        <div className="flex w-full gap-6 pr-8 items-start">
 
           {/* Card 1 */}
           <div className="mt-15 ml-8 w-1/3 rounded-2xl border border-slate-700 bg-slate-800 p-20 text-left">
@@ -91,7 +92,7 @@ const Beranda = () => {
             {/* Card 2 */}
             <div className="mt-15 ml-5 rounded-2xl border border-slate-700 bg-slate-800 p-8 text-left">
 
-             {/* Icons */}
+              {/* Icons */}
               <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-blue-500/20">
                 <FaCode className="text-2xl text-blue-500" />
               </div>
@@ -159,6 +160,7 @@ const Beranda = () => {
                 Always Learning
               </p>
 
+              {/* Descripsi */}
               <p className="mt-3 text-xl font-normal text-slate-400">
                 Continuously exploring new technologies, patterns, and design systems.
               </p>
@@ -168,6 +170,141 @@ const Beranda = () => {
 
         </div>
 
+      </div>
+
+      {/* Skills */}
+      <div className="mt-20 flex flex-col items-center text-center">
+
+        {/* Badge */}
+        <div className="inline-flex items-center rounded-full border border-blue-500/40 bg-blue-500/5 px-5 py-4 text-sm font-medium uppercase tracking-widest text-blue-500">
+          Skills
+        </div>
+
+        {/* Judul */}
+        <h2 className="mt-6 max-w-3xl text-5xl font-bold leading-tight text-white">
+          My technical toolkit
+        </h2>
+
+        <p className="mt-3 text-xl font-normal text-slate-400">
+          A curated set of technologies I use to design, build, and ship modern applications.
+        </p>
+
+        {/* Card Skills */}
+        <div className="mt-16 grid w-full maxx-w-7xl grid-cols-4 gap-6 px-6">
+
+          {/* Card 1 */}
+          <div className="rounded-3xl border border-slate-700 bg-slate-800 p-8 text-left">
+            <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-blue-500/40 bg-blue-500/5">
+              <LuPanelsTopLeft className="text-2xl text-blue-500" />
+            </div>
+
+
+            <h3 className="text-2xl font-bold text-white">
+              Frontend
+            </h3>
+
+            <div className="mt-6 flex flex-wrap gap-2">
+              <span className="rounded-full border border-slate-600 bg-slate-700 px-4 py-2 text-sm text-slate-300">
+                HTML
+              </span>
+
+              <span className="rounded-full border border-slate-600 bg-slate-700 px-4 py-2 text-sm text-slate-300">
+                CSS
+              </span>
+
+              <span className="rounded-full border border-slate-600 bg-slate-700 px-4 py-2 text-sm text-slate-300">
+                JavaScript
+              </span>
+
+              <span className="rounded-full border border-slate-600 bg-slate-700 px-4 py-2 text-sm text-slate-300">
+                React
+              </span>
+
+              <span className="rounded-full border border-slate-600 bg-slate-700 px-4 py-2 text-sm text-slate-300">
+                Tailwind CSS
+              </span>
+            </div>
+          </div>
+
+          {/* Card 2 */}
+          <div className="rounded-3xl border border-slate-700 bg-slate-800 p-8 text-left">
+            <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-blue-500/40 bg-blue-500/5">
+              <LuServer className="text-2xl text-blue-500" />
+            </div>
+
+            <h3 className="text-2xl font-bold text-white">
+              Backend
+            </h3>
+
+            <div className="mt-6 flex flex-wrap gap-2">
+              <span className="rounded-full border border-slate-600 bg-slate-700 px-4 py-2 text-sm text-slate-300">
+                PHP
+              </span>
+
+              <span className="rounded-full border border-slate-600 bg-slate-700 px-4 py-2 text-sm text-slate-300">
+                Laravel
+              </span>
+
+              <span className="rounded-full border border-slate-600 bg-slate-700 px-4 py-2 text-sm text-slate-300">
+                Mysql
+              </span>
+            </div>
+          </div>
+
+          {/* Card 3 */}
+          <div className="rounded-3xl border border-slate-700 bg-slate-800 p-8 text-left">
+            <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-blue-500/40 bg-blue-500/5">
+              <CiMobile2 className="text-2xl font-bold text-blue-500" />
+            </div>
+
+            <h3 className="text-2xl font-bold text-white">
+              Mobile
+            </h3>
+
+            <div className="mt-6 flex flex-wrap gap-2">
+              <span className="rounded-full border border-slate-600 bg-slate-700 px-4 py-2 text-sm text-slate-300">
+                Flutter
+              </span>
+
+              <span className="rounded-full border border-slate-600 bg-slate-700 px-4 py-2 text-sm text-slate-300">
+                Firebase
+              </span>
+            </div>
+          </div>
+
+          {/* Card 4 */}
+          <div className="rounded-3xl border border-slate-700 bg-slate-800 p-8 text-left">
+            <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-blue-500/40 bg-blue-500/5">
+              <LuWrench className="text-2xl font-bold text-blue-500" />
+            </div>
+
+            <h3 className="text-2xl font-bold text-white">
+              Tools
+            </h3>
+
+            <div className="mt-6 flex flex-wrap gap-2">
+              <span className="rounded-full border border-slate-600 bg-slate-700 px-4 py-2 text-sm text-slate-300">
+                Git
+              </span>
+
+              <span className="rounded-full border border-slate-600 bg-slate-700 px-4 py-2 text-sm text-slate-300">
+                GitHub
+              </span>
+
+              <span className="rounded-full border border-slate-600 bg-slate-700 px-4 py-2 text-sm text-slate-300">
+                VS Code
+              </span>
+
+              <span className="rounded-full border border-slate-600 bg-slate-700 px-4 py-2 text-sm text-slate-300">
+                Laragon
+              </span>
+
+              <span className="rounded-full border border-slate-600 bg-slate-700 px-4 py-2 text-sm text-slate-300">
+                Figma
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   )
