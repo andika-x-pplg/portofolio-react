@@ -2,10 +2,11 @@ import React from 'react'
 import Index from '../components/HeroRole/Index'
 import { FaGithub, FaTiktok, FaInstagram, FaCode } from "react-icons/fa";
 import { MdEmail, MdOutlineRocketLaunch } from "react-icons/md";
-import { LuSparkles, LuGraduationCap, LuPanelsTopLeft, LuServer, LuWrench } from 'react-icons/lu';
+import { LuSparkles, LuGraduationCap, LuPanelsTopLeft, LuServer, LuWrench, LuBriefcaseBusiness } from 'react-icons/lu';
 import { CiMobile2 } from 'react-icons/ci';
 import netubeImage from "../assets/gambar/netube.png";
 import WarungNusantaraImage from "../assets/gambar/WarungNusantara.png";
+import portofolioImage from "../assets//gambar/portofolio.png";
 
 const Beranda = () => {
   return (
@@ -417,8 +418,152 @@ const Beranda = () => {
             </div>
           </div>
 
+          {/* Card 3 */}
+          <div className="rounded-3xl border border-slate-700 bg-slate-800 text-left overflow-hidden">
+
+            {/* Gambar */}
+            <div className="w-full">
+              <img
+                src={portofolioImage}
+                alt="Portofolio"
+                className="h-80 w-full object-cover"
+              />
+            </div>
+
+            {/* Isi Card */}
+            <div className="p-8">
+
+              <h3 className="text-2xl font-bold text-white">
+                Portofolio
+              </h3>
+
+              <p className="mt-4 text-lg leading-relaxed text-slate-400">
+                An elegant, dynamic, and simple modern portfolio.
+              </p>
+
+              {/* Teach */}
+              <div className="mt-6 flex flex-wrap gap-3">
+                <span className="rounded-full border border-blue-500/40 bg-blue-500/5 px-4 py-2 text-sm text-blue-500">
+                  React
+                </span>
+
+                <span className="rounded-full border border-blue-500/40 bg-blue-500/5 px-4 py-2 text-sm text-blue-500">
+                  Tailwind CSS
+                </span>
+
+                <span className="rounded-full border border-blue-500/40 bg-blue-500/5 px-4 py-2 text-sm text-blue-500">
+                  JavaScript
+                </span>
+              </div>
+
+            </div>
+          </div>
+
         </div>
 
+      </div>
+
+      {/* Journey */}
+      <div className="mt-20 flex flex-col items-center text-center">
+
+        {/* Badge */}
+        <div className="inline-flex items-center rounded-full border border-blue-500/40 bg-blue-500/5 px-5 py-4 text-sm font-medium uppercase tracking-widest text-blue-500">
+          JOURNEY
+        </div>
+
+        {/* Judul */}
+        <h2 className="mt-6 max-w-3xl text-5xl font-bold leading-tight text-white">
+          Experience & growth
+        </h2>
+
+        <p className="mt-3 text-xl font-normal text-slate-400">
+          The path that shaped me as a developer.
+        </p>
+
+
+        {/* Timeline */}
+        <div className="relative mt-16 w-full max-w-6xl">
+
+          {/* Garis Tengah */}
+          <div className="absolute left-1/2 top-0 h-full w-px translate-x-1/2 bg-blue-500">
+          </div>
+
+
+          {/* Timeline Item 1 - KIRI */}
+          <div className="relative grid grid-cols-2">
+
+            {/* Card kiri */}
+            <div className="pr-12">
+              <div className="rounded-3xl border border-slate-700 bg-slate-800 p-8 text-right">
+
+                {/* Badge + Tahun */}
+                <div className="flex justify-end items-center gap-4">
+                  <span className="rounded-full border border-purple-500/40 bg-purple-500/10 px-4 py-2 text-sm text-purple-400">
+                    Internship
+                  </span>
+
+                  <span className="text-slate-400">
+                    2024
+                  </span>
+                </div>
+
+                {/* Judul */}
+                <h3 className="mt-5 text-2xl font-bold text-white">
+                  Web Developer Internship
+                </h3>
+
+                {/* Perusahaan */}
+                <p className="mt-1 text-lg text-blue-500">
+                  APTMI
+                </p>
+
+                {/* Deskripsi */}
+                <p className="mt-4 text-lg leading-relaxed text-slate-400">
+                  Built a production company profile platform with Laravel,
+                  React, and Inertia.js. Implemented role-based access control
+                  and a responsive admin dashboard used by the editorial team.
+                </p>
+
+              </div>
+            </div>
+
+
+            {/* Icon tengah */}
+            <div className="absolute left-1/2 top-5 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-blue-500">
+              <LuBriefcaseBusiness className="text-xl text-white" />
+            </div>
+
+          </div>
+
+          {/* Timeline Item 2 - Kanan */}
+          <div className="relative mt-14 grid grid-cols-2">
+
+            {/* Card Kanan */}
+            <div className="col-start-2 pl-12">
+              <div className="rounded-3xl border border-slate-700 bg-slate-700 p-8 text-left">
+
+                {/* Badge + Tahun */}
+                <div className="flex items-center gap-4">
+                  <span className="rounded-full border border-purple-500/40 bg-purple-500/10 px-4  py-2 text-sm text-purple-400">
+                    Projects
+                  </span>
+
+                  <span className="text-slate-400">
+                    2025 - Present
+                  </span>
+                </div>
+
+                {/* Judul */}
+                <h3 className="mt-5 text-2xl font-bold text-white">
+                  Freelance & Personal Projects
+                </h3>
+
+                {/* Keterangan */}
+                <p className="mt-1 text-lg text-blue-500"
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   )
