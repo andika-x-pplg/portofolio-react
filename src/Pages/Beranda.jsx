@@ -1,9 +1,11 @@
 import React from 'react'
 import Index from '../components/HeroRole/Index'
-import { FaGithub, FaTiktok, FaInstagram, FaCode } from "react-icons/fa";
+import { FaGithub, FaTiktok, FaInstagram, FaCode, FaReact, FaLaravel, FaFlutter, FaPhp, FaGit, FaHtml5, FaCss3, FaJava, FaVuejs } from "react-icons/fa";
 import { MdEmail, MdOutlineRocketLaunch } from "react-icons/md";
 import { LuSparkles, LuGraduationCap, LuPanelsTopLeft, LuServer, LuWrench, LuBriefcaseBusiness } from 'react-icons/lu';
 import { CiMobile2 } from 'react-icons/ci';
+import { BiLogoJavascript } from 'react-icons/bi';
+import { SiMysql, SiFirebase, SiTailwindcss } from 'react-icons/si';
 import netubeImage from "../assets/gambar/netube.png";
 import WarungNusantaraImage from "../assets/gambar/WarungNusantara.png";
 import portofolioImage from "../assets//gambar/portofolio.png";
@@ -503,7 +505,7 @@ const Beranda = () => {
                   </span>
 
                   <span className="text-slate-400">
-                    2024
+                    2026
                   </span>
                 </div>
 
@@ -540,7 +542,7 @@ const Beranda = () => {
 
             {/* Card Kanan */}
             <div className="col-start-2 pl-12">
-              <div className="rounded-3xl border border-slate-700 bg-slate-700 p-8 text-left">
+              <div className="rounded-3xl border border-slate-700 bg-slate-800 p-8 text-left">
 
                 {/* Badge + Tahun */}
                 <div className="flex items-center gap-4">
@@ -559,9 +561,153 @@ const Beranda = () => {
                 </h3>
 
                 {/* Keterangan */}
-                <p className="mt-1 text-lg text-blue-500"
+                <p className="mt-1 text-lg text-blue-500">
+                  Self-directed
+                </p>
+
+                {/* Descripsi */}
+                <p className="mt-4 text-lg leading-relaxed text-slate-400">
+                  Designed and shipped full-stack web and mobile apps —
+                  from food ordering platforms to movie apps — focusing on
+                  clean architecture, performance, and delightful UI/UX.
+                </p>
+
               </div>
             </div>
+
+            {/* Icons Tengah */}
+            <div className="absolute left-1/2 top-5 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-blue-500">
+              <LuBriefcaseBusiness className="text-xl text-white" />
+            </div>
+
+          </div>
+
+          {/* Timeline Item 3 - KIRI */}
+          <div className="relative grid grid-cols-2">
+
+            {/* Card kiri */}
+            <div className="pr-12">
+              <div className="rounded-3xl border border-slate-700 bg-slate-800 p-8 text-right">
+
+                {/* Badge + Tahun */}
+                <div className="flex justify-end items-center gap-4">
+                  <span className="rounded-full border border-purple-500/40 bg-purple-500/10 px-4 py-2 text-sm text-purple-400">
+                    Learning
+                  </span>
+
+                  <span className="text-slate-400">
+                    2024
+                  </span>
+                </div>
+
+                {/* Judul */}
+                <h3 className="mt-5 text-2xl font-bold text-white">
+                  Learning Journey
+                </h3>
+
+                {/* Perusahaan */}
+                <p className="mt-1 text-lg text-blue-500">
+                  Continuous Growth
+                </p>
+
+                {/* Deskripsi */}
+                <p className="mt-4 text-lg leading-relaxed text-slate-400">
+                  Deepened expertise across the modern stack: React, Laravel, Flutter, and
+                  Firebase. Constantly exploring new tools, patterns, and design systems.
+                </p>
+
+              </div>
+            </div>
+
+
+            {/* Icon tengah */}
+            <div className="absolute left-1/2 top-5 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-blue-500">
+              <LuBriefcaseBusiness className="text-xl text-white" />
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* Stastics */}
+      <div className="mt-20 w-full px-8">
+        <div className="grid grid-cols-4 rounded-3xl border border-slate-700 bg-slate-800 px-10 py-12 text-center">
+
+          {/* Start 1 */}
+          <div>
+            <h3 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
+              10+
+            </h3>
+            <p className="mt-3 text-lg text-slate-400">
+              Projects Completed
+            </p>
+          </div>
+
+          {/* Start 2 */}
+          <div>
+            <h3 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
+              15+
+            </h3>
+            <p className="mt-3 text-lg text-slate-400">
+              Technologies Learned
+            </p>
+          </div>
+
+          {/* Start 3 */}
+          <div>
+            <h3 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
+              1
+            </h3>
+            <p className="mt-3 text-lg text-slate-400">
+              Certificates
+            </p>
+          </div>
+
+          {/* Start 4 */}
+          <div>
+            <h3 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
+              3+
+            </h3>
+            <p className="mt-3 text-lg text-slate-400">
+              Years of Learning
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      {/* TECH STACK */}
+      <div className="mt-20 flex flex-col items-center text-center">
+        
+        {/* Badge */}
+         <div className="inline-flex items-center rounded-full border border-blue-500/40 bg-blue-500/5 px-5 py-4 text-sm font-medium uppercase tracking-widest text-blue-500">
+          TECH STACK
+        </div>
+
+        {/* Judul */}
+        <h2 className="mt-6 max-w-3xl text-5xl font-bold leading-tight text-white">
+         Technologies I work with
+        </h2>
+
+        {/* Tech Stack Cards */}
+        <div className="mt-16 grid w-full grid-cols-5 gap-5 px-6">
+
+          {/* React */}
+          <div className="flex h-36 flex-col items-center justify-center rounded-3xl border border-slate-700 bg-slate-800 transition hover:border-blue-500">
+            <FaReact className="text-5xl text-cyan-400" />
+            <p className="mt-4 text-base font-medium text-slate-400">
+              React
+            </p>
+          </div>
+
+          {/* Laravel */}
+          <div className="flex h-36 flex-col items-center justify-center rounded-3xl border border-sltae-700 bg-slate-800 transition hover:border-blue-500">
+            <FaLaravel className="text-5xl text-red-500" />
+            <p className="mt-4 text-base font-medium text-slate-400">
+              Laravel
+            </p>
           </div>
         </div>
       </div>
