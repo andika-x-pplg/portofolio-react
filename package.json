@@ -11,10 +11,14 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
+    "clsx": "^2.1.1",
     "react": "^19.2.8",
+    "react-countup": "^6.5.3",
     "react-dom": "^19.2.8",
     "react-icons": "^5.7.0",
+    "react-intersection-observer": "^11.0.0",
     "react-router-dom": "^7.18.2",
+    "react-router-hash-link": "^2.4.3",
     "react-simple-typewriter": "^5.0.1",
     "tailwindcss": "^4.3.3"
   },
@@ -23,6 +27,7 @@
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.4",
+    "animate.css": "^4.1.1",
     "eslint": "^10.8.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.3",

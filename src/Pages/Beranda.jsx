@@ -1,20 +1,122 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Index from '../components/HeroRole/Index'
-import { FaGithub, FaTiktok, FaInstagram, FaCode, FaReact, FaLaravel, FaFlutter, FaPhp, FaGit, FaHtml5, FaCss3, FaJava, FaVuejs } from "react-icons/fa";
-import { MdEmail, MdOutlineRocketLaunch } from "react-icons/md";
-import { LuSparkles, LuGraduationCap, LuPanelsTopLeft, LuServer, LuWrench, LuBriefcaseBusiness } from 'react-icons/lu';
+import { FaGithub, FaTiktok, FaInstagram, FaCode, FaReact, FaLaravel, FaPhp, FaGitAlt, FaHtml5, FaCss3Alt, FaJava, } from "react-icons/fa";
+import { MdEmail, MdOutlineRocketLaunch, MdLocationOn, MdKeyboardArrowUp } from "react-icons/md";
+import { LuSparkles, LuGraduationCap, LuPanelsTopLeft, LuServer, LuWrench, LuBriefcaseBusiness, LuAward } from 'react-icons/lu';
 import { CiMobile2 } from 'react-icons/ci';
 import { BiLogoJavascript } from 'react-icons/bi';
 import { SiMysql, SiFirebase, SiTailwindcss } from 'react-icons/si';
+import { FaFlutter, FaGitlab } from 'react-icons/fa6';
+import { IoLogoIonic } from 'react-icons/io';
 import netubeImage from "../assets/gambar/netube.png";
 import WarungNusantaraImage from "../assets/gambar/WarungNusantara.png";
 import portofolioImage from "../assets//gambar/portofolio.png";
+import andikaImage from "../assets/gambar/andika.png";
+import 'animate.css'
+import { useInView } from 'react-intersection-observer';
 
 const Beranda = () => {
+  // State untuk form contact
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  const [formStatus, setFormStatus] = useState('');
+
+  // Handler untuk perubahan input
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // Handler untuk submit form
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    // Validasi form
+    if (!formData.name || !formData.email || !formData.message) {
+      setFormStatus('Please fill in all fields');
+      return;
+    }
+
+    // Kirim email menggunakan mailto (alternative: bisa pakai EmailJS atau backend API)
+    const mailtoLink = `mailto:andikaesdasaputra@gmail.com?subject=Message from ${encodeURIComponent(formData.name)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+    
+    window.location.href = mailtoLink;
+    
+    // Reset form
+    setFormData({
+      name: '',
+      email: '',
+      message: ''
+    });
+    
+    setFormStatus('Thank you! Your message has been sent.');
+    
+    // Clear status setelah 3 detik
+    setTimeout(() => {
+      setFormStatus('');
+    }, 3000);
+  };
+
+  // Data social media links
+  const socialLinks = {
+    github: 'https://github.com/yourusername', // Ganti dengan username GitHub Anda
+    tiktok: 'https://tiktok.com/@yourusername', // Ganti dengan username TikTok Anda
+    instagram: 'https://instagram.com/yourusername', // Ganti dengan username Instagram Anda
+    email: 'mailto:andikaesdasaputra@gmail.com'
+  };
+
+  // Small Stat component using requestAnimationFrame + useInView
+  const Stat = ({ end, suffix = '', label }) => {
+    const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.5 });
+    const [value, setValue] = useState(0);
+
+    useEffect(() => {
+      if (!inView) return;
+      let start = null;
+      const duration = 1500;
+      const from = 0;
+      const to = Number(end) || 0;
+      let rafId = null;
+
+      const step = (timestamp) => {
+        if (!start) start = timestamp;
+        const progress = Math.min((timestamp - start) / duration, 1);
+        const current = Math.floor(progress * (to - from) + from);
+        setValue(current);
+        if (progress < 1) {
+          rafId = window.requestAnimationFrame(step);
+        } else {
+          setValue(to);
+        }
+      };
+
+      rafId = window.requestAnimationFrame(step);
+      return () => {
+        if (rafId) window.cancelAnimationFrame(rafId);
+      };
+    }, [inView, end]);
+
+    return (
+      <div ref={ref}>
+        <h3 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
+          {value}{suffix}
+        </h3>
+        <p className="mt-3 text-lg text-slate-400">{label}</p>
+      </div>
+    );
+  };
+
   return (
     <>
       {/*  Hero */}
-      <div className="w-[90%] mx-auto p-10 mt-10 flex justify-between items-stars">
+      <div id="hero" className="w-[90%] mx-auto p-10 mt-10 flex justify-between items-stars">
         <div className='space-y-5 flex-1'>
           <div className="bg-linear-to-r bg-white/5  border border-slate-500/15 inline-flex items-center  text-gray-500 font-normal text-2x1 rounded-full gap-2 px-5 py-2.5">
             🟢 Available for work
@@ -27,16 +129,59 @@ const Beranda = () => {
           <Index />
           <p className="text-lg max-w-lg  items-center text-slate-500">I craft modern, high-performance web and mobile applications with clean code and beautiful UI/UX — from React frontends to Laravel backends and Flutter apps.</p>
           <div className='flex items-center gap-5'>
-            <button className="bg-linear-to-r text-lg from-blue-500 to-purple-600 cursor-pointer px-5 py-2.5 rounded-full text-white font-semibold">Download CV</button>
-            <button className="bg-white/5 border-r-slate-500/15 text-lg cursor-pointer px-5 py-2.5 rounded-full text-white font-semibold">Contact Me</button>
+            <a
+              href="/CV_Andika_Esda_Saputra.pdf"
+              download="CV_Andika_Esda_Saputra.pdf"
+              className="rounded-full bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-3 font-semibold text-white transition hover:scale-105"
+            >
+              Download CV
+            </a>
+            <a
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=andikaesdasaputra@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cursor-pointer rounded-full border border-slate-500/15 bg-white/5 px-5 py-2.5 text-lg font-semibold text-white transition hover:bg-slate-400"
+            >
+              Contact Me
+            </a>
           </div>
 
           {/* Icons */}
           <div className="flex items-center gap-4">
-            <FaGithub className="text-4xl text-white" />
-            <FaTiktok className="text-4xl text-white" />
-            <FaInstagram className="text-4xl text-white" />
-            <MdEmail className="text-4xl text-white" />
+            <a 
+              href={socialLinks.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition hover:scale-110 hover:text-blue-500"
+              aria-label="GitHub"
+            >
+              <FaGithub className="text-4xl text-white hover:text-blue-500 cursor-pointer" />
+            </a>
+            <a 
+              href={socialLinks.tiktok}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition hover:scale-110 hover:text-blue-500"
+              aria-label="TikTok"
+            >
+              <FaTiktok className="text-4xl text-white hover:text-blue-500 cursor-pointer" />
+            </a>
+            <a 
+              href={socialLinks.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition hover:scale-110 hover:text-blue-500"
+              aria-label="Instagram"
+            >
+              <FaInstagram className="text-4xl text-white hover:text-blue-500 cursor-pointer" />
+            </a>
+            <a 
+              href={socialLinks.email}
+              className="transition hover:scale-110 hover:text-blue-500"
+              aria-label="Email"
+            >
+              <MdEmail className="text-4xl text-white hover:text-blue-500 cursor-pointer" />
+            </a>
           </div>
         </div>
 
@@ -44,7 +189,7 @@ const Beranda = () => {
         <div className="w-full flex-1">
           <img
             className="h-150 w-full object-cover object-center"
-            src="https://preview.redd.it/manga-end-theory-something-takemichi-can-do-to-save-everyone-v0-yyfrcoatja481.jpg?width=768&format=pjpg&auto=webp&s=1820f1c58ca82f43c21dcf225020587dda736fa8"
+            src={andikaImage}
             alt=""
           />
 
@@ -55,7 +200,7 @@ const Beranda = () => {
       </div>
 
       {/* About */}
-      <div className="mt-20 flex flex-col items-center text-center">
+      <div id="about" className="mt-20 flex flex-col items-center text-center ">
 
         {/* Badge */}
         <div className="inline-flex items-center rounded-full border border-blue-500/40 bg-blue-500/5 px-5 py-2 text-sm font-medium uppercase tracking-widest text-blue-500">
@@ -70,7 +215,7 @@ const Beranda = () => {
         </h2>
 
         {/* Container Card 1 + Card-card kecil */}
-        <div className="flex w-full gap-6 pr-8 items-start">
+        <div className="flex w-full gap-6 pr-8 items-start animate__animated animate__fadeIn animate__faster">
 
           {/* Card 1 */}
           <div className="mt-15 ml-8 w-1/3 rounded-2xl border border-slate-700 bg-slate-800 p-20 text-left">
@@ -178,7 +323,7 @@ const Beranda = () => {
       </div>
 
       {/* Skills */}
-      <div className="mt-20 flex flex-col items-center text-center">
+      <div id="skills" className="mt-20 flex flex-col items-center text-center">
 
         {/* Badge */}
         <div className="inline-flex items-center rounded-full border border-blue-500/40 bg-blue-500/5 px-5 py-4 text-sm font-medium uppercase tracking-widest text-blue-500">
@@ -195,7 +340,7 @@ const Beranda = () => {
         </p>
 
         {/* Card Skills */}
-        <div className="mt-16 grid w-full maxx-w-7xl grid-cols-4 gap-6 px-6">
+        <div className="mt-16 grid w-full maxx-w-7xl grid-cols-4 gap-6 px-6 animate__animated animate__fadeIn animate__faster">
 
           {/* Card 1 */}
           <div className="rounded-3xl border border-slate-700 bg-slate-800 p-8 text-left">
@@ -313,7 +458,7 @@ const Beranda = () => {
       </div>
 
       {/* Featured Projects */}
-      <div className="mt-20 flex flex-col items-center text-center">
+      <div id="projects" className="mt-20 flex flex-col items-center text-center">
 
         {/* Badge */}
         <div className="inline-flex items-center rounded-full border border-blue-500/40 bg-blue-500/5 px-5 py-4 text-sm font-medium uppercase tracking-widest text-blue-500">
@@ -330,7 +475,7 @@ const Beranda = () => {
         </p>
 
         {/* Project Card */}
-        <div className="mt-12 grid w-full grid-cols-2 gap-8 px-8">
+        <div className="mt-12 grid w-full grid-cols-2 gap-8 px-8 animate__animated animate__fadeIn animate__faster">
 
           {/* Card 1 */}
           <div className="rounded-3xl border border-slate-700 bg-slate-800 text-left overflow-hidden">
@@ -466,7 +611,7 @@ const Beranda = () => {
       </div>
 
       {/* Journey */}
-      <div className="mt-20 flex flex-col items-center text-center">
+      <div id="experience" className="mt-20 flex flex-col items-center text-center">
 
         {/* Badge */}
         <div className="inline-flex items-center rounded-full border border-blue-500/40 bg-blue-500/5 px-5 py-4 text-sm font-medium uppercase tracking-widest text-blue-500">
@@ -636,59 +781,31 @@ const Beranda = () => {
         <div className="grid grid-cols-4 rounded-3xl border border-slate-700 bg-slate-800 px-10 py-12 text-center">
 
           {/* Start 1 */}
-          <div>
-            <h3 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
-              10+
-            </h3>
-            <p className="mt-3 text-lg text-slate-400">
-              Projects Completed
-            </p>
-          </div>
+          <Stat end={10} suffix="+" label="Projects Completed" />
 
           {/* Start 2 */}
-          <div>
-            <h3 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
-              15+
-            </h3>
-            <p className="mt-3 text-lg text-slate-400">
-              Technologies Learned
-            </p>
-          </div>
+          <Stat end={15} suffix="+" label="Technologies Learned" />
 
           {/* Start 3 */}
-          <div>
-            <h3 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
-              1
-            </h3>
-            <p className="mt-3 text-lg text-slate-400">
-              Certificates
-            </p>
-          </div>
+          <Stat end={1} label="Certificates" />
 
           {/* Start 4 */}
-          <div>
-            <h3 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
-              3+
-            </h3>
-            <p className="mt-3 text-lg text-slate-400">
-              Years of Learning
-            </p>
-          </div>
+          <Stat end={3} suffix="+" label="Years of Learning" />
 
         </div>
       </div>
 
       {/* TECH STACK */}
       <div className="mt-20 flex flex-col items-center text-center">
-        
+
         {/* Badge */}
-         <div className="inline-flex items-center rounded-full border border-blue-500/40 bg-blue-500/5 px-5 py-4 text-sm font-medium uppercase tracking-widest text-blue-500">
+        <div className="inline-flex items-center rounded-full border border-blue-500/40 bg-blue-500/5 px-5 py-4 text-sm font-medium uppercase tracking-widest text-blue-500">
           TECH STACK
         </div>
 
         {/* Judul */}
         <h2 className="mt-6 max-w-3xl text-5xl font-bold leading-tight text-white">
-         Technologies I work with
+          Technologies I work with
         </h2>
 
         {/* Tech Stack Cards */}
@@ -704,13 +821,527 @@ const Beranda = () => {
 
           {/* Laravel */}
           <div className="flex h-36 flex-col items-center justify-center rounded-3xl border border-sltae-700 bg-slate-800 transition hover:border-blue-500">
-            <FaLaravel className="text-5xl text-red-500" />
+            <FaLaravel className='text-red-500 text-5xl' />
             <p className="mt-4 text-base font-medium text-slate-400">
               Laravel
             </p>
           </div>
+
+          {/* Flutter */}
+          <div className="flex h-36 flex-col items-center justify-center rounded-3xl border border-sltae-700 bg-slate-800 transition hover:border-blue-500">
+            <FaFlutter className='text-blue-500 text-5xl' />
+            <p className="mt-4 text-base font-medium text-slate-400">
+              Flutter
+            </p>
+          </div>
+
+          {/* PHP */}
+          <div className="flex h-36 flex-col items-center justify-center rounded-3xl border border-sltae-700 bg-slate-800 transition hover:border-blue-500">
+            <FaPhp className='text-[#777cb5] text-5xl' />
+            <p className="mt-4 text-base font-medium text-slate-400">
+              PHP
+            </p>
+          </div>
+
+          {/* JavaScript */}
+          <div className="flex h-36 flex-col items-center justify-center rounded-3xl border border-sltae-700 bg-slate-800 transition hover:border-blue-500">
+            <BiLogoJavascript className='text-yellow-300 text-5xl' />
+            <p className="mt-4 text-base font-medium text-slate-400">
+              JavaScript
+            </p>
+          </div>
+
+          {/* MySql */}
+          <div className="flex h-36 flex-col items-center justify-center rounded-3xl border border-sltae-700 bg-slate-800 transition hover:border-blue-500">
+            <SiMysql className='text-blue-500 text-5xl' />
+            <p className="mt-4 text-base font-medium text-slate-400">
+              MySQL
+            </p>
+          </div>
+
+          {/* Firebase */}
+          <div className="flex h-36 flex-col items-center justify-center rounded-3xl border border-sltae-700 bg-slate-800 transition hover:border-blue-500">
+            <SiFirebase className='text-[#ffc929] text-5xl' />
+            <p className="mt-4 text-base font-medium text-slate-400">
+              Firebase
+            </p>
+          </div>
+
+          {/* Git */}
+          <div className="flex h-36 flex-col items-center justify-center rounded-3xl border border-sltae-700 bg-slate-800 transition hover:border-blue-500">
+            <FaGitAlt className='text-[#f04f32] text-5xl' />
+            <p className="mt-4 text-base font-medium text-slate-400">
+              Git
+            </p>
+          </div>
+
+          {/* Github */}
+          <div className="flex h-36 flex-col items-center justify-center rounded-3xl border border-sltae-700 bg-slate-800 transition hover:border-blue-500">
+            <FaGithub className='text-white text-5xl' />
+            <p className="mt-4 text-base font-medium text-slate-400">
+              Github
+            </p>
+          </div>
+
+          {/* Tailwind CSS */}
+          <div className="flex h-36 flex-col items-center justify-center rounded-3xl border border-sltae-700 bg-slate-800 transition hover:border-blue-500">
+            <SiTailwindcss className='text-cyan-500 text-5xl' />
+            <p className="mt-4 text-base font-medium text-slate-400">
+              Tailwind CSS
+            </p>
+          </div>
+
+          {/* HTML */}
+          <div className="flex h-36 flex-col items-center justify-center rounded-3xl border border-sltae-700 bg-slate-800 transition hover:border-blue-500">
+            <FaHtml5 className='text-[#e34c27] text-5xl' />
+            <p className="mt-4 text-base font-medium text-slate-400">
+              HTML
+            </p>
+          </div>
+
+          {/* CSS */}
+          <div className="flex h-36 flex-col items-center justify-center rounded-3xl border border-sltae-700 bg-slate-800 transition hover:border-blue-500">
+            <FaCss3Alt className='text-[#274ce3] text-5xl' />
+            <p className="mt-4 text-base font-medium text-slate-400">
+              CSS
+            </p>
+          </div>
+
+          {/* Java */}
+          <div className="flex h-36 flex-col items-center justify-center rounded-3xl border border-sltae-700 bg-slate-800 transition hover:border-blue-500">
+            <FaJava className='text-white text-5xl' />
+            <p className="mt-4 text-base font-medium text-slate-400">
+              Java
+            </p>
+          </div>
+
+          {/* Gitlab */}
+          <div className="flex h-36 flex-col items-center justify-center rounded-3xl border border-sltae-700 bg-slate-800 transition hover:border-blue-500">
+            <FaGitlab className='text-black text-5xl' />
+            <p className="mt-4 text-base font-medium text-slate-400">
+              Gitlab
+            </p>
+          </div>
+
+          {/* Ionic */}
+          <div className="flex h-36 flex-col items-center justify-center rounded-3xl border border-sltae-700 bg-slate-800 transition hover:border-blue-500">
+            <IoLogoIonic className='text-cyan-500 text-5xl' />
+            <p className="mt-4 text-base font-medium text-slate-400">
+              Ionic
+            </p>
+          </div>
         </div>
       </div>
+
+
+      {/* Achivements */}
+      <div className="mt-20 flex flex-col items-center text-center">
+
+        {/* Badge */}
+        <div className="inline-flex items-center rounded-full border border-blue-500/40 bg-blue-500/5 px-5 py-4 text-sm font-medium uppercase tracking-widest text-blue-500">
+          Certificates
+        </div>
+
+        {/* Judul */}
+        <h2 className="mt-6 max-w-3xl text-5xl font-bold leading-tight text-white">
+          Certifications & achievements
+        </h2>
+
+        <p className="mt-3 text-xl font-normal text-slate-400">
+          Proof of continuous learning across the modern development stack.
+        </p>
+
+        {/* Certificate Card */}
+        <div className="mt-16 w-full px-8">
+
+          <div className="mx-auto w-full max-w-sm overflow-hidden rounded-3xl border border-slate-700 bg-slate-800">
+
+            {/* Bagian Atas */}
+            <div className="flex h-64 items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900">
+              <LuAward className="text-6xl text-blue-500" />
+            </div>
+
+            {/* Isi Card */}
+            <div className="p-6 text-left">
+
+              {/* Tahun */}
+              <p className="text-sm font-medium text-purple-400">
+                2024
+              </p>
+
+              {/* Nama Sertifikat */}
+              <h3 className="mt-2 text-xl font-bold text-white">
+                LearningX
+              </h3>
+
+              {/* Penerbit */}
+              <p className="mt-2 text-base text-slate-400">
+                LearningX Academy
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      {/* Kontak */}
+      <div id="contact" className="mt-20 flex flex-col items-center text-center">
+
+        {/* Badge */}
+        <div className="inline-flex items-center rounded-full border border-blue-500/40 bg-blue-500/5 px-5 py-4 text-sm font-medium uppercase tracking-widest text-blue-500">
+          CONTACT
+        </div>
+
+        {/* Judul */}
+        <h2 className="mt-6 max-w-3xl text-5xl font-bold leading-tight text-white">
+          Let's build
+          <br />
+          something together
+        </h2>
+
+        <p className="mt-3 text-xl font-normal text-slate-400">
+          Have a project in mind or just want to say hi? My inbox is always open.
+        </p>
+
+
+        {/* Contact Content */}
+        <div className="mt-16 grid w-full grid-cols-2 gap-10 px-8">
+
+          {/* ================= LEFT CARD ================= */}
+          <div className="rounded-3xl border border-slate-700 bg-slate-800 p-10 text-left">
+
+            {/* Judul */}
+            <h3 className="text-2xl font-bold text-white">
+              Get in touch
+            </h3>
+
+            {/* Deskripsi */}
+            <p className="mt-4 max-w-md text-lg leading-relaxed text-slate-400">
+              Whether it's a freelance project, an internship, or a
+              full-time role — I'd love to hear from you.
+            </p>
+
+
+            {/* Email */}
+            <div className="mt-10 flex items-center gap-4">
+
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/20">
+                <MdEmail className="text-2xl text-blue-500" />
+              </div>
+
+              <span className="text-lg text-slate-400">
+                andikaesdasaputra@gmail.com
+              </span>
+
+            </div>
+
+
+            {/* Lokasi */}
+            <div className="mt-5 flex items-center gap-4">
+
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-purple-500/20">
+                <MdLocationOn className="text-2xl text-purple-400" />
+              </div>
+
+              <span className="text-lg text-slate-400">
+                Samarinda, Indonesia
+              </span>
+
+            </div>
+
+
+            {/* Social Media */}
+            <div className="mt-16 flex items-center gap-4">
+
+              {/* GitHub */}
+              <a
+                href={socialLinks.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-14 w-14 items-center justify-center rounded-full border border-slate-700 bg-slate-800 transition hover:border-blue-500 hover:text-blue-500"
+                aria-label="GitHub"
+              >
+                <FaGithub className="text-2xl text-slate-400 hover:text-blue-500" />
+              </a>
+
+
+              {/* TikTok */}
+              <a
+                href={socialLinks.tiktok}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-14 w-14 items-center justify-center rounded-full border border-slate-700 bg-slate-800 transition hover:border-blue-500 hover:text-blue-500"
+                aria-label="TikTok"
+              >
+                <FaTiktok className="text-2xl text-slate-400 hover:text-blue-500" />
+              </a>
+
+
+              {/* Instagram */}
+              <a
+                href={socialLinks.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-14 w-14 items-center justify-center rounded-full border border-slate-700 bg-slate-800 transition hover:border-blue-500 hover:text-blue-500"
+                aria-label="Instagram"
+              >
+                <FaInstagram className="text-2xl text-slate-400 hover:text-blue-500" />
+              </a>
+
+            </div>
+
+          </div>
+
+
+          {/* ================= RIGHT CARD ================= */}
+          <div className="rounded-3xl border border-slate-700 bg-slate-800 p-10 text-left">
+
+            <form onSubmit={handleSubmit}>
+
+              {/* Name + Email */}
+              <div className="grid grid-cols-2 gap-6">
+
+                {/* Name */}
+                <div>
+                  <label className="text-lg font-semibold text-white">
+                    Name
+                  </label>
+
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    placeholder="Your name"
+                    required
+                    className="mt-3 w-full rounded-full border border-slate-700 bg-slate-700/60 px-6 py-4 text-lg text-white outline-none placeholder:text-slate-500 focus:border-blue-500"
+                  />
+                </div>
+
+
+                {/* Email */}
+                <div>
+                  <label className="text-lg font-semibold text-white">
+                    Email
+                  </label>
+
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="you@email.com"
+                    required
+                    className="mt-3 w-full rounded-full border border-slate-700 bg-slate-700/60 px-6 py-4 text-lg text-white outline-none placeholder:text-slate-500 focus:border-blue-500"
+                  />
+                </div>
+
+              </div>
+
+
+              {/* Message */}
+              <div className="mt-7">
+
+                <label className="text-lg font-semibold text-white">
+                  Message
+                </label>
+
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  rows="5"
+                  placeholder="Tell me about your project..."
+                  required
+                  className="mt-3 w-full resize-none rounded-3xl border border-slate-700 bg-slate-700/60 px-6 py-5 text-lg text-white outline-none placeholder:text-slate-500 focus:border-blue-500"
+                />
+
+              </div>
+
+              {/* Status Message */}
+              {formStatus && (
+                <div className={`mt-4 rounded-full px-6 py-3 text-center ${formStatus.includes('Thank') ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
+                  {formStatus}
+                </div>
+              )}
+
+              {/* Button */}
+              <button
+                type="submit"
+                className="mt-8 flex w-full items-center justify-center gap-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-4 text-lg font-semibold text-white transition hover:scale-[1.01] hover:shadow-lg hover:shadow-blue-500/20"
+              >
+                <MdOutlineRocketLaunch className="text-2xl" />
+                Send Message
+              </button>
+
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* Footer */}
+      <footer className="mt-20 px-8 pb-8">
+
+        <div className="rounded-3xl border border-slate-700 bg-slate-800 p-10">
+
+          {/* Bagian Atas */}
+          <div className="grid grid-cols-3 items-start gap-10">
+
+            {/* Profile */}
+            <div>
+
+              {/* Logo + Nama */}
+              <div className="flex items-center gap-3">
+
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-purple-500">
+                  <span className="text-lg font-bold text-white">
+                    AE
+                  </span>
+                </div>
+
+                <h3 className="text-xl font-bold text-white">
+                  Andika Esda Saputra
+                </h3>
+
+              </div>
+
+              {/* Deskripsi */}
+              <p className="mt-4 max-w-md text-lg leading-relaxed text-slate-400">
+                Full Stack Web Developer crafting modern web
+                <br />
+                & mobile experiences.
+              </p>
+
+            </div>
+
+
+            {/* Navigation */}
+            <div className="flex justify-center">
+
+              <nav className="flex items-center gap-8">
+
+                <a
+                  href="#hero"
+                  className="text-lg text-slate-400 transition hover:text-white"
+                >
+                  Home
+                </a>
+
+                <a
+                  href="#about"
+                  className="text-lg text-slate-400 transition hover:text-white"
+                >
+                  About
+                </a>
+
+                <a
+                  href="#skills"
+                  className="text-lg text-slate-400 transition hover:text-white"
+                >
+                  Skills
+                </a>
+
+                <a
+                  href="#projects"
+                  className="text-lg text-slate-400 transition hover:text-white"
+                >
+                  Projects
+                </a>
+
+                <a
+                  href="#experience"
+                  className="text-lg text-slate-400 transition hover:text-white"
+                >
+                  Experience
+                </a>
+
+                <a
+                  href="#contact"
+                  className="text-lg text-slate-400 transition hover:text-white"
+                >
+                  Contact
+                </a>
+
+              </nav>
+
+            </div>
+
+
+            {/* Social Media */}
+            <div className="flex justify-end gap-4">
+
+              {/* GitHub */}
+              <a
+                href={socialLinks.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-14 w-14 items-center justify-center rounded-full border border-slate-700 bg-slate-700/40 transition hover:border-blue-500 hover:bg-blue-500/10"
+                aria-label="GitHub"
+              >
+                <FaGithub className="text-2xl text-slate-400 hover:text-blue-500" />
+              </a>
+
+              {/* TikTok */}
+              <a
+                href={socialLinks.tiktok}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-14 w-14 items-center justify-center rounded-full border border-slate-700 bg-slate-700/40 transition hover:border-blue-500 hover:bg-blue-500/10"
+                aria-label="TikTok"
+              >
+                <FaTiktok className="text-2xl text-slate-400 hover:text-blue-500" />
+              </a>
+
+              {/* Instagram */}
+              <a
+                href={socialLinks.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-14 w-14 items-center justify-center rounded-full border border-slate-700 bg-slate-700/40 transition hover:border-blue-500 hover:bg-blue-500/10"
+                aria-label="Instagram"
+              >
+                <FaInstagram className="text-2xl text-slate-400 hover:text-blue-500" />
+              </a>
+
+            </div>
+
+          </div>
+
+
+          {/* Garis */}
+          <div className="my-10 h-px bg-slate-700"></div>
+
+
+          {/* Bagian Bawah */}
+          <div className="flex items-center justify-between">
+
+            {/* Copyright */}
+            <p className="text-lg text-slate-400">
+              © 2026 Andika Esda Saputra. All rights reserved.
+            </p>
+
+
+            {/* Back To Top */}
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="flex items-center gap-2 rounded-full border border-slate-700 bg-slate-700/40 px-6 py-3 text-base font-medium text-slate-400 transition hover:border-blue-500 hover:text-white"
+            >
+              Back to Top
+              <MdKeyboardArrowUp className="text-xl" />
+            </button>
+
+          </div>
+
+        </div>
+
+      </footer>
     </>
   )
 }
