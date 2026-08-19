@@ -35,33 +35,33 @@ const Beranda = () => {
   };
 
   // Handler untuk submit form
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Validasi form
-    if (!formData.name || !formData.email || !formData.message) {
-      setFormStatus('Please fill in all fields');
-      return;
-    }
 
-    // Kirim email menggunakan mailto (alternative: bisa pakai EmailJS atau backend API)
-    const mailtoLink = `mailto:andikaesdasaputra@gmail.com?subject=Message from ${encodeURIComponent(formData.name)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
-    
-    window.location.href = mailtoLink;
-    
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      message: ''
-    });
-    
-    setFormStatus('Thank you! Your message has been sent.');
-    
-    // Clear status setelah 3 detik
-    setTimeout(() => {
-      setFormStatus('');
-    }, 3000);
+    try {
+      const response = await fetch("https://formspree.io/f/xnpaoren", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setFormStatus("Thank you! Your message has been sent.");
+
+        setFormData({
+          name: "",
+          email: "",
+          message: "",
+        });
+      } else {
+        setFormStatus("Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      setFormStatus("Something went wrong. Please try again.");
+    }
   };
 
   // Data social media links
@@ -148,8 +148,8 @@ const Beranda = () => {
 
           {/* Icons */}
           <div className="flex items-center gap-4">
-            <a 
-              href={socialLinks.github}
+            <a
+              href="https://github.com/andika-x-pplg"
               target="_blank"
               rel="noopener noreferrer"
               className="transition hover:scale-110 hover:text-blue-500"
@@ -157,8 +157,8 @@ const Beranda = () => {
             >
               <FaGithub className="text-4xl text-white hover:text-blue-500 cursor-pointer" />
             </a>
-            <a 
-              href={socialLinks.tiktok}
+            <a
+              href="https://www.tiktok.com/@dik9893"
               target="_blank"
               rel="noopener noreferrer"
               className="transition hover:scale-110 hover:text-blue-500"
@@ -166,8 +166,8 @@ const Beranda = () => {
             >
               <FaTiktok className="text-4xl text-white hover:text-blue-500 cursor-pointer" />
             </a>
-            <a 
-              href={socialLinks.instagram}
+            <a
+              href="https://www.instagram.com/andika_esda_saputra?igsi=MWx4d291dncxdHVzeA=="
               target="_blank"
               rel="noopener noreferrer"
               className="transition hover:scale-110 hover:text-blue-500"
@@ -175,8 +175,8 @@ const Beranda = () => {
             >
               <FaInstagram className="text-4xl text-white hover:text-blue-500 cursor-pointer" />
             </a>
-            <a 
-              href={socialLinks.email}
+            <a
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=andikaesdasaputra@gmail.com"
               className="transition hover:scale-110 hover:text-blue-500"
               aria-label="Email"
             >
@@ -480,14 +480,34 @@ const Beranda = () => {
           {/* Card 1 */}
           <div className="rounded-3xl border border-slate-700 bg-slate-800 text-left overflow-hidden">
 
-            {/* Gambar */}
-            <div className="w-full">
+            {/* Gambar + Hover Overlay */}
+            <a
+              href="https://github.com/andika-x-pplg/netube"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative block w-full overflow-hidden"
+            >
               <img
                 src={netubeImage}
                 alt="Netube Application"
-                className="h-80 w-full object-cover"
+                className="h-80 w-full object-cover transition-all duration-500 ease-out group-hover:scale-110 group-hover:blur-sm"
               />
-            </div>
+
+              {/* Overlay */}
+              <div className="absolute inset-0 flex items-center justify-center bg-slate-950/50 opacity-0 backdrop-blur-[2px] transition-all duration-300 group-hover:opacity-100">
+
+                <div className="flex flex-col items-center gap-3 text-white transition-transform duration-300 group-hover:scale-100">
+
+                  <FaGithub className="text-5xl" />
+
+                  <span className="text-xl font-semibold">
+                    Netube Application
+                  </span>
+
+                </div>
+
+              </div>
+            </a>
 
             {/* Isi Card */}
             <div className="p-8">
@@ -522,14 +542,34 @@ const Beranda = () => {
           {/* Card 2 */}
           <div className="rounded-3xl border border-slate-700 bg-slate-800 text-left overflow-hidden">
 
-            {/* Gambar */}
-            <div className="w-full">
+            {/* Gambar + Hover Overlay */}
+            <a
+              href="https://github.com/andika-x-pplg/warung-nusantara"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative block w-full overflow-hidden"
+            >
               <img
                 src={WarungNusantaraImage}
                 alt="Warung Nusantara Web"
-                className="h-80 w-full object-cover"
+                className="h-80 w-full object-cover transition-all duration-500 ease-out group-hover:scale-110 group-hover:blur-sm"
               />
-            </div>
+
+              {/* Overlay */}
+              <div className="absolute inset-0 flex items-center justify-center bg-slate-950/50 opacity-0 backdrop-blur-[2px] transition-all duration-300 group-hover:opacity-100">
+
+                <div className="flex flex-col items-center gap-3 text-white">
+
+                  <FaGithub className="text-5xl" />
+
+                  <span className="text-xl font-semibold">
+                    Warung Nusantara Web
+                  </span>
+
+                </div>
+
+              </div>
+            </a>
 
             {/* Isi Card */}
             <div className="p-8">
@@ -568,14 +608,34 @@ const Beranda = () => {
           {/* Card 3 */}
           <div className="rounded-3xl border border-slate-700 bg-slate-800 text-left overflow-hidden">
 
-            {/* Gambar */}
-            <div className="w-full">
+            {/* Gambar + Hover Overlay */}
+            <a
+              href="https://github.com/andika-x-pplg/portofolio-react"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative block w-full overflow-hidden"
+            >
               <img
                 src={portofolioImage}
                 alt="Portofolio"
-                className="h-80 w-full object-cover"
+                className="h-80 w-full object-cover transition-all duration-500 ease-out group-hover:scale-110 group-hover:blur-sm"
               />
-            </div>
+
+              {/* Overlay */}
+              <div className="absolute inset-0 flex items-center justify-center bg-slate-950/50 opacity-0 backdrop-blur-[2px] transition-all duration-300 group-hover:opacity-100">
+
+                <div className="flex flex-col items-center gap-3 text-white">
+
+                  <FaGithub className="text-5xl" />
+
+                  <span className="text-xl font-semibold">
+                    Portfolio
+                  </span>
+
+                </div>
+
+              </div>
+            </a>
 
             {/* Isi Card */}
             <div className="p-8">
@@ -1059,7 +1119,7 @@ const Beranda = () => {
 
               {/* GitHub */}
               <a
-                href={socialLinks.github}
+                href="https://github.com/andika-x-pplg"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex h-14 w-14 items-center justify-center rounded-full border border-slate-700 bg-slate-800 transition hover:border-blue-500 hover:text-blue-500"
@@ -1071,7 +1131,7 @@ const Beranda = () => {
 
               {/* TikTok */}
               <a
-                href={socialLinks.tiktok}
+                href="https://www.tiktok.com/@dik9893"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex h-14 w-14 items-center justify-center rounded-full border border-slate-700 bg-slate-800 transition hover:border-blue-500 hover:text-blue-500"
@@ -1083,7 +1143,7 @@ const Beranda = () => {
 
               {/* Instagram */}
               <a
-                href={socialLinks.instagram}
+                href="https://www.instagram.com/andika_esda_saputra?igsi=MWx4d291dncxdHVzeA=="
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex h-14 w-14 items-center justify-center rounded-full border border-slate-700 bg-slate-800 transition hover:border-blue-500 hover:text-blue-500"
@@ -1279,7 +1339,7 @@ const Beranda = () => {
 
               {/* GitHub */}
               <a
-                href={socialLinks.github}
+                href="https://github.com/andika-x-pplg"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex h-14 w-14 items-center justify-center rounded-full border border-slate-700 bg-slate-700/40 transition hover:border-blue-500 hover:bg-blue-500/10"
@@ -1290,7 +1350,7 @@ const Beranda = () => {
 
               {/* TikTok */}
               <a
-                href={socialLinks.tiktok}
+                href="https://www.tiktok.com/@dik9893"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex h-14 w-14 items-center justify-center rounded-full border border-slate-700 bg-slate-700/40 transition hover:border-blue-500 hover:bg-blue-500/10"
@@ -1301,7 +1361,7 @@ const Beranda = () => {
 
               {/* Instagram */}
               <a
-                href={socialLinks.instagram}
+                href="https://www.instagram.com/andika_esda_saputra?igsi=MWx4d291dncxdHVzeA=="
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex h-14 w-14 items-center justify-center rounded-full border border-slate-700 bg-slate-700/40 transition hover:border-blue-500 hover:bg-blue-500/10"

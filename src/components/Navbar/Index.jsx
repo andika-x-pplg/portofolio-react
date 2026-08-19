@@ -31,7 +31,7 @@ const Index = () => {
                 </div>
 
                 <div className='text-zinc-100 space-x-5'>
-                    <HashLink to={'/'}>
+                    <HashLink to={'/#hero'}>
                         Home
                     </HashLink>
                     <HashLink smooth to={'/#about'}>
@@ -51,9 +51,9 @@ const Index = () => {
                     </HashLink>
                 </div>
 
-                <Link className="bg-linear-to-r text-white font-semibold from-[#4e7ef5] to-[#875ff5]  rounded-full px-5 py-2.5 flex items-center">
+                <HashLink smooth to={'/#contact'} className="bg-linear-to-r text-white font-semibold from-[#4e7ef5] to-[#875ff5]  rounded-full px-5 py-2.5 flex items-center">
                     Hire Me
-                </Link>
+                </HashLink>
             </nav>
         </header>
     )
