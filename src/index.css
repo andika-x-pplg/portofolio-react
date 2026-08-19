@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "./styles/animations.css";
+@import "./styles/responsive.css";
 
 html,
 body {

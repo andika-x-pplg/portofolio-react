@@ -1,0 +1,253 @@
+/* Responsive Design for Portfolio */
+
+/* Tablet and Desktop (768px and up) */
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+/* Large Desktop (1024px and up) */
+@media (min-width: 1024px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+/* Extra Large Desktop (1280px and up) */
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+/* Mobile First Breakpoints */
+
+/* Small Mobile (320px and up) */
+@media (min-width: 320px) {
+  /* Hero Section */
+  #hero {
+    flex-direction: column;
+    padding: 2rem;
+  }
+  
+  #hero .flex-1 {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  
+  #hero .image-container {
+    width: 100%;
+  }
+  
+  /* Typography */
+  h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    line-height: 1.3;
+  }
+  
+  /* Cards */
+  .card {
+    padding: 1.5rem;
+  }
+  
+  /* Grid Layouts */
+  .grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid-cols-3 {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid-cols-4 {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid-cols-5 {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Skills Section */
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Project Cards */
+  .project-card {
+    margin-bottom: 2rem;
+  }
+  
+  /* Stats Section */
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Contact Form */
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Medium Tablet (768px and up) */
+@media (min-width: 768px) {
+  /* Hero Section */
+  #hero {
+    flex-direction: row;
+    padding: 3rem;
+  }
+  
+  #hero .flex-1 {
+    width: 50%;
+    margin-bottom: 0;
+  }
+  
+  #hero .image-container {
+    width: 50%;
+  }
+  
+  /* Typography */
+  h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+  }
+  
+  h2 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+  
+  /* Grid Layouts */
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .grid-cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .grid-cols-5 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  /* Skills Section */
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* Stats Section */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* Contact Form */
+  .contact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Large Desktop (1024px and up) */
+@media (min-width: 1024px) {
+  /* Hero Section */
+  #hero {
+    padding: 4rem;
+  }
+  
+  #hero .flex-1 {
+    width: 45%;
+  }
+  
+  #hero .image-container {
+    width: 55%;
+  }
+  
+  /* Typography */
+  h1 {
+    font-size: 4.5rem;
+    line-height: 1;
+  }
+  
+  h2 {
+    font-size: 3rem;
+    line-height: 1.1;
+  }
+  
+  /* Grid Layouts */
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .grid-cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .grid-cols-5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  
+  /* Skills Section */
+  .skills-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  /* Stats Section */
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Touch Devices */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects on touch devices */
+  .project-card:hover {
+    transform: none;
+    opacity: 1;
+  }
+  
+  /* Larger touch targets */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Adjust spacing */
+  .gap-4 {
+    gap: 1rem;
+  }
+  
+  .gap-6 {
+    gap: 1.5rem;
+  }
+  
+  .gap-8 {
+    gap: 2rem;
+  }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Optimize for high DPI displays */
+  .profile-image {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Reduce Motion (for accessibility) */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

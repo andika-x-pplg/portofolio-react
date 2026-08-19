@@ -3,7 +3,7 @@ import { Typewriter } from 'react-simple-typewriter';
 
 export default function Index() {
   return (
-    <h1 className="mt-4 text-white font-sans text-3xl font-bold">
+    <h1 className="mt-4 text-white font-sans text-3xl font-bold animated-element hero-title">
       <span className="text-white">
         <Typewriter
           words={[
