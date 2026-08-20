@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Index from '../components/HeroRole/Index'
 import { FaGithub, FaTiktok, FaInstagram, FaCode, FaReact, FaLaravel, FaPhp, FaGitAlt, FaHtml5, FaCss3Alt, FaJava, } from "react-icons/fa";
 import { MdEmail, MdOutlineRocketLaunch, MdLocationOn, MdKeyboardArrowUp } from "react-icons/md";
@@ -14,6 +14,10 @@ import portofolioImage from "../assets//gambar/portofolio.png";
 import andikaImage from "../assets/gambar/andika.png";
 import 'animate.css'
 import { useInView } from 'react-intersection-observer';
+import Reveal from '../components/Reveal/Reveal';
+import HeroSparkles from '../components/HeroSparkles/HeroSparkles';
+import { useTilt } from '../hooks/useTilt';
+import { useMagnetic } from '../hooks/useMagnetic';
 
 const Beranda = () => {
   // State untuk form contact
@@ -24,6 +28,24 @@ const Beranda = () => {
   });
 
   const [formStatus, setFormStatus] = useState('');
+
+  // 3D tilt bindings for interactive hover elements
+  const [timelineRef, timelineInView] = useInView({ triggerOnce: true, threshold: 0.15 });
+
+  const { ref: dlRef, onMouseMove: dlOnMouseMove, onMouseLeave: dlOnMouseLeave, style: dlStyle } = useMagnetic({ strength: 0.3 });
+  const { ref: cmRef, onMouseMove: cmOnMouseMove, onMouseLeave: cmOnMouseLeave, style: cmStyle } = useMagnetic({ strength: 0.3 });
+  const { ref: smRef, onMouseMove: smOnMouseMove, onMouseLeave: smOnMouseLeave, style: smStyle } = useMagnetic({ strength: 0.2 });
+
+  const { ref: skill1Ref, onMouseMove: skill1OnMouseMove, onMouseLeave: skill1OnMouseLeave, style: skill1Style } = useTilt({ max: 6, scale: 1.02 });
+  const { ref: skill2Ref, onMouseMove: skill2OnMouseMove, onMouseLeave: skill2OnMouseLeave, style: skill2Style } = useTilt({ max: 6, scale: 1.02 });
+  const { ref: skill3Ref, onMouseMove: skill3OnMouseMove, onMouseLeave: skill3OnMouseLeave, style: skill3Style } = useTilt({ max: 6, scale: 1.02 });
+  const { ref: skill4Ref, onMouseMove: skill4OnMouseMove, onMouseLeave: skill4OnMouseLeave, style: skill4Style } = useTilt({ max: 6, scale: 1.02 });
+  const { ref: certRef, onMouseMove: certOnMouseMove, onMouseLeave: certOnMouseLeave, style: certStyle } = useTilt({ max: 6, scale: 1.02 });
+
+  const { ref: heroRef, onMouseMove: heroOnMouseMove, onMouseLeave: heroOnMouseLeave, style: heroStyle } = useTilt({ max: 6, scale: 1.02 });
+  const { ref: project1Ref, onMouseMove: project1OnMouseMove, onMouseLeave: project1OnMouseLeave, style: project1Style } = useTilt({ max: 5, scale: 1.015 });
+  const { ref: project2Ref, onMouseMove: project2OnMouseMove, onMouseLeave: project2OnMouseLeave, style: project2Style } = useTilt({ max: 5, scale: 1.015 });
+  const { ref: project3Ref, onMouseMove: project3OnMouseMove, onMouseLeave: project3OnMouseLeave, style: project3Style } = useTilt({ max: 5, scale: 1.015 });
 
   // Handler untuk perubahan input
   const handleInputChange = (e) => {
@@ -105,7 +127,7 @@ const Beranda = () => {
 
     return (
       <div ref={ref}>
-        <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
+        <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-cyan-400">
           {value}{suffix}
         </h3>
         <p className="mt-2 md:mt-3 text-sm md:text-base lg:text-lg text-slate-400">{label}</p>
@@ -118,14 +140,18 @@ const Beranda = () => {
       {/*  Hero */}
       <div id="hero" className="w-[90%] mx-auto p-4 md:p-8 lg:p-10 mt-6 md:mt-10 flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-12">
         <div className='space-y-3 md:space-y-4 flex-1 animate-slideInLeft text-center lg:text-left'>
-          <div className="bg-linear-to-r bg-white/5 border border-slate-500/15 inline-flex items-center text-gray-500 font-normal text-sm md:text-base rounded-full gap-2 px-4 py-2 md:px-5 md:py-2.5">
-            🟢 Available for work
+          <div className="glitch-frame inline-flex items-center border border-slate-500/15 bg-white/5 text-gray-400 font-normal text-sm md:text-base rounded-full gap-2 px-4 py-2 md:px-5 md:py-2.5 backdrop-blur-md">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="absolute inline-flex h-full w-full rounded-full bg-cyan-400/35 animate-ping"></span>
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-cyan-400"></span>
+            </span>
+            Open for selected projects
           </div>
 
           {/* Judul - Ukuran diperkecil dan responsive */}
-          <h1 className='text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-bold max-w-lg text-white leading-tight'>
-            Hi, I'm <span className='bg-clip-text text-transparent bg-linear-to-r from-blue-500 to-blue-600'>Andika </span> 
-            <span className="bg-clip-text text-transparent bg-linear-to-r from-purple-600 to-blue-500">
+          <h1 className='glitch-text-subtle text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-bold max-w-lg text-white leading-tight'>
+            Hi, I'm <span className='text-cyan-400'>Andika </span> 
+            <span className="text-cyan-400">
             Esda Saputra</span>
           </h1>
           <Index />
@@ -137,16 +163,27 @@ const Beranda = () => {
           
           <div className='flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 md:gap-4'>
             <a
+              ref={dlRef}
+              onMouseMove={dlOnMouseMove}
+              onMouseLeave={dlOnMouseLeave}
+              style={dlStyle}
               href="/CV_Andika_Esda_Saputra.pdf"
               download="CV_Andika_Esda_Saputra.pdf"
-              className="w-full sm:w-auto rounded-full bg-gradient-to-r from-blue-500 to-purple-500 px-5 py-2.5 md:px-6 md:py-3 font-semibold text-white transition hover:scale-105 text-center text-sm md:text-base"
+              data-cursor="hover"
+              data-cursor-text="Download"
+              className="w-full sm:w-auto rounded-full bg-cyan-500 px-5 py-2.5 md:px-6 md:py-3 font-semibold text-white transition hover:bg-cyan-400 hover:scale-105 text-center text-sm md:text-base"
             >
               Download CV
             </a>
             <a
+              ref={cmRef}
+              onMouseMove={cmOnMouseMove}
+              onMouseLeave={cmOnMouseLeave}
+              style={cmStyle}
               href="https://mail.google.com/mail/?view=cm&fs=1&to=andikaesdasaputra@gmail.com"
               target="_blank"
               rel="noopener noreferrer"
+              data-cursor="hover"
               className="w-full sm:w-auto cursor-pointer rounded-full border border-slate-500/15 bg-white/5 px-4 py-2 md:px-5 md:py-2.5 text-sm md:text-base font-semibold text-white transition hover:bg-slate-400 text-center"
             >
               Contact Me
@@ -159,47 +196,80 @@ const Beranda = () => {
               href="https://github.com/andika-x-pplg"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition hover:scale-110 hover:text-blue-500"
+              className="transition hover:scale-110 hover:text-cyan-400"
               aria-label="GitHub"
             >
-              <FaGithub className="text-2xl md:text-3xl lg:text-3xl text-white hover:text-blue-500 cursor-pointer" />
+              <FaGithub className="text-2xl md:text-3xl lg:text-3xl text-white hover:text-cyan-400 cursor-pointer" />
             </a>
             <a
               href="https://www.tiktok.com/@dik9893"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition hover:scale-110 hover:text-blue-500"
+              className="transition hover:scale-110 hover:text-cyan-400"
               aria-label="TikTok"
             >
-              <FaTiktok className="text-2xl md:text-3xl lg:text-3xl text-white hover:text-blue-500 cursor-pointer" />
+              <FaTiktok className="text-2xl md:text-3xl lg:text-3xl text-white hover:text-cyan-400 cursor-pointer" />
             </a>
             <a
               href="https://www.instagram.com/andika_esda_saputra?igsi=MWx4d291dncxdHVzeA=="
               target="_blank"
               rel="noopener noreferrer"
-              className="transition hover:scale-110 hover:text-blue-500"
+              className="transition hover:scale-110 hover:text-cyan-400"
               aria-label="Instagram"
             >
-              <FaInstagram className="text-2xl md:text-3xl lg:text-3xl text-white hover:text-blue-500 cursor-pointer" />
+              <FaInstagram className="text-2xl md:text-3xl lg:text-3xl text-white hover:text-cyan-400 cursor-pointer" />
             </a>
             <a
               href="https://mail.google.com/mail/?view=cm&fs=1&to=andikaesdasaputra@gmail.com"
-              className="transition hover:scale-110 hover:text-blue-500"
+              className="transition hover:scale-110 hover:text-cyan-400"
               aria-label="Email"
             >
-              <MdEmail className="text-2xl md:text-3xl lg:text-3xl text-white hover:text-blue-500 cursor-pointer" />
+              <MdEmail className="text-2xl md:text-3xl lg:text-3xl text-white hover:text-cyan-400 cursor-pointer" />
             </a>
           </div>
         </div>
 
-        {/* Gambar - Responsive dengan Aspect Ratio 1:1 */}
+        {/* Gambar - Responsive dengan Aspect Ratio 1:1, interactive 3D tilt */}
         <div className="w-full flex-1 animate-slideInRight flex flex-col items-center">
-          <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[360px] lg:max-w-[400px] aspect-square">
+          <div
+            ref={heroRef}
+            onMouseMove={heroOnMouseMove}
+            onMouseLeave={heroOnMouseLeave}
+            style={heroStyle}
+            data-cursor="hover"
+            data-cursor-text="Explore"
+            className="relative w-full max-w-[280px] sm:max-w-[320px] md:max-w-[360px] lg:max-w-[400px] aspect-square rounded-2xl transform-3d"
+          >
+            <HeroSparkles />
+            <div className="absolute inset-[8%] rounded-full border border-cyan-400/10 blur-[1px]" />
+            <div className="absolute inset-[2%] rounded-[28px] bg-cyan-400/5 blur-2xl" />
             <img
-              className="h-full w-full object-cover object-center rounded-2xl animate-float shadow-2xl"
+              className="h-full w-full object-cover object-center rounded-2xl animate-float shadow-2xl ring-1 ring-white/10"
               src={andikaImage}
               alt="Andika Esda Saputra"
             />
+            <div data-tilt-glare className="pointer-events-none absolute inset-0 rounded-2xl" />
+
+            {/* Floating tech-stack pills orbiting the portrait */}
+            <div className="hidden sm:flex absolute -top-5 -left-6 items-center gap-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl px-3 py-1.5 shadow-lg animate-floatSlow">
+              <FaReact className="text-cyan-400" />
+              <span className="text-xs font-medium text-slate-300">React</span>
+            </div>
+
+            <div className="hidden sm:flex absolute -top-6 -right-7 items-center gap-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl px-3 py-1.5 shadow-lg animate-floatMedium">
+              <FaLaravel className="text-red-500" />
+              <span className="text-xs font-medium text-slate-300">Laravel</span>
+            </div>
+
+            <div className="hidden sm:flex absolute -bottom-5 -left-7 items-center gap-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl px-3 py-1.5 shadow-lg animate-floatFast">
+              <FaFlutter className="text-sky-500" />
+              <span className="text-xs font-medium text-slate-300">Flutter</span>
+            </div>
+
+            <div className="hidden sm:flex absolute -bottom-6 -right-6 items-center gap-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl px-3 py-1.5 shadow-lg animate-floatMedium">
+              <BiLogoJavascript className="text-yellow-300" />
+              <span className="text-xs font-medium text-slate-300">JavaScript</span>
+            </div>
           </div>
 
           <p className="mt-3 inline-flex items-center gap-2 rounded-full border border-slate-500/15 bg-white/5 px-4 py-2 md:px-5 md:py-2.5 text-xs md:text-sm font-normal text-gray-500">
@@ -212,23 +282,25 @@ const Beranda = () => {
       {/* About */}
       <div id="about" className="mt-16 md:mt-20 flex flex-col items-center text-center px-4">
 
-        {/* Badge */}
-        <div className="inline-flex items-center rounded-full border border-blue-500/40 bg-blue-500/5 px-4 md:px-5 py-2 text-xs md:text-sm font-medium uppercase tracking-widest text-blue-500 animate-fadeIn">
-          About Me
-        </div>
+        <Reveal>
+          {/* Badge */}
+          <div className="inline-flex items-center rounded-full border border-cyan-400/40 bg-cyan-400/5 px-4 md:px-5 py-2 text-xs md:text-sm font-medium uppercase tracking-widest text-cyan-400">
+            About Me
+          </div>
 
-        {/* Judul */}
-        <h2 className="mt-4 md:mt-6 max-w-3xl text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-white animate-fadeIn delay-100">
-          Passionate about
-          <br />
-          building great software
-        </h2>
+          {/* Judul */}
+          <h2 className="mt-4 md:mt-6 max-w-3xl text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-white">
+            Passionate about
+            <br />
+            building great software
+          </h2>
+        </Reveal>
 
         {/* Container Card 1 + Card-card kecil */}
         <div className="flex flex-col lg:flex-row w-full gap-4 md:gap-6 mt-12 md:mt-16 max-w-7xl animate-fadeIn delay-200">
 
           {/* Card 1 */}
-          <div className="w-full lg:w-1/3 rounded-2xl border border-slate-700 bg-slate-800 p-6 md:p-10 lg:p-12 text-left hover:border-blue-500/50 transition-all duration-300">
+          <div className="w-full lg:w-1/3 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 md:p-10 lg:p-12 text-left hover:border-cyan-400/50 transition-all duration-300">
             <p className="text-base md:text-lg lg:text-xl font-normal text-slate-400">
               I'am a{" "}
               <span className="font-bold text-white">
@@ -250,11 +322,11 @@ const Beranda = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 flex-1 gap-4 md:gap-6">
 
             {/* Card 2 */}
-            <div className="rounded-2xl border border-slate-700 bg-slate-800 p-6 md:p-8 text-left hover:border-blue-500/50 hover:scale-105 transition-all duration-300">
+            <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 md:p-8 text-left hover:border-cyan-400/50 hover:scale-105 transition-all duration-300">
 
               {/* Icons */}
-              <div className="mb-4 md:mb-6 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full bg-blue-500/20">
-                <FaCode className="text-xl md:text-2xl text-blue-500" />
+              <div className="mb-4 md:mb-6 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full bg-cyan-400/20">
+                <FaCode className="text-xl md:text-2xl text-cyan-400" />
               </div>
 
               {/* Judul */}
@@ -270,11 +342,11 @@ const Beranda = () => {
             </div>
 
             {/* Card 3 */}
-            <div className="rounded-2xl border border-slate-700 bg-slate-800 p-6 md:p-8 text-left hover:border-blue-500/50 hover:scale-105 transition-all duration-300">
+            <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 md:p-8 text-left hover:border-cyan-400/50 hover:scale-105 transition-all duration-300">
 
               {/* Icons */}
-              <div className="mb-4 md:mb-6 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full bg-blue-500/20">
-                <MdOutlineRocketLaunch className="text-xl md:text-2xl text-blue-500" />
+              <div className="mb-4 md:mb-6 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full bg-cyan-400/20">
+                <MdOutlineRocketLaunch className="text-xl md:text-2xl text-cyan-400" />
               </div>
 
               {/* Judul */}
@@ -289,11 +361,11 @@ const Beranda = () => {
             </div>
 
             {/* Card 4 */}
-            <div className="rounded-2xl border border-slate-700 bg-slate-800 p-6 md:p-8 text-left hover:border-blue-500/50 hover:scale-105 transition-all duration-300">
+            <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 md:p-8 text-left hover:border-cyan-400/50 hover:scale-105 transition-all duration-300">
 
               {/* Icons */}
-              <div className="mb-4 md:mb-6 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full bg-blue-500/20">
-                <LuSparkles className="text-xl md:text-2xl text-blue-500" />
+              <div className="mb-4 md:mb-6 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full bg-cyan-400/20">
+                <LuSparkles className="text-xl md:text-2xl text-cyan-400" />
               </div>
 
               {/* Judul */}
@@ -308,11 +380,11 @@ const Beranda = () => {
             </div>
 
             {/* Card 5 */}
-            <div className="rounded-2xl border border-slate-700 bg-slate-800 p-6 md:p-8 text-left hover:border-blue-500/50 hover:scale-105 transition-all duration-300">
+            <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 md:p-8 text-left hover:border-cyan-400/50 hover:scale-105 transition-all duration-300">
 
               {/* Icons */}
-              <div className="mb-4 md:mb-6 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full bg-blue-500/20">
-                <LuGraduationCap className="text-xl md:text-2xl text-blue-500" />
+              <div className="mb-4 md:mb-6 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full bg-cyan-400/20">
+                <LuGraduationCap className="text-xl md:text-2xl text-cyan-400" />
               </div>
 
               {/* Judul */}
@@ -335,15 +407,17 @@ const Beranda = () => {
       {/* Skills */}
       <div id="skills" className="mt-16 md:mt-20 flex flex-col items-center text-center px-4">
 
-        {/* Badge */}
-        <div className="inline-flex items-center rounded-full border border-blue-500/40 bg-blue-500/5 px-4 md:px-5 py-3 md:py-4 text-xs md:text-sm font-medium uppercase tracking-widest text-blue-500 animate-fadeIn">
-          Skills
-        </div>
+        <Reveal axis="y">
+          {/* Badge */}
+          <div className="inline-flex items-center rounded-full border border-cyan-400/40 bg-cyan-400/5 px-4 md:px-5 py-3 md:py-4 text-xs md:text-sm font-medium uppercase tracking-widest text-cyan-400">
+            Skills
+          </div>
 
-        {/* Judul */}
-        <h2 className="mt-4 md:mt-6 max-w-3xl text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-white animate-fadeIn delay-100">
-          My technical toolkit
-        </h2>
+          {/* Judul */}
+          <h2 className="mt-4 md:mt-6 max-w-3xl text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-white">
+            My technical toolkit
+          </h2>
+        </Reveal>
 
         <p className="mt-3 text-base md:text-lg lg:text-xl font-normal text-slate-400 animate-fadeIn delay-200">
           A curated set of technologies I use to design, build, and ship modern applications.
@@ -353,9 +427,17 @@ const Beranda = () => {
         <div className="mt-12 md:mt-16 grid w-full max-w-7xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 animate-fadeIn delay-300">
 
           {/* Card 1 */}
-          <div className="rounded-3xl border border-slate-700 bg-slate-800 p-6 md:p-8 text-left hover:border-blue-500/50 hover:scale-105 transition-all duration-300">
-            <div className="mb-4 md:mb-6 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border border-blue-500/40 bg-blue-500/5">
-              <LuPanelsTopLeft className="text-xl md:text-2xl text-blue-500" />
+          <div
+            ref={skill1Ref}
+            onMouseMove={skill1OnMouseMove}
+            onMouseLeave={skill1OnMouseLeave}
+            style={skill1Style}
+            data-cursor="hover"
+            className="relative rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 md:p-8 text-left hover:border-cyan-400/50 transition-colors duration-300"
+          >
+            <div data-tilt-glare className="pointer-events-none absolute inset-0 rounded-3xl" />
+            <div className="mb-4 md:mb-6 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border border-cyan-400/40 bg-cyan-400/5">
+              <LuPanelsTopLeft className="text-xl md:text-2xl text-cyan-400" />
             </div>
 
             <h3 className="text-xl md:text-2xl font-bold text-white">
@@ -382,9 +464,17 @@ const Beranda = () => {
           </div>
 
           {/* Card 2 */}
-          <div className="rounded-3xl border border-slate-700 bg-slate-800 p-6 md:p-8 text-left hover:border-blue-500/50 hover:scale-105 transition-all duration-300">
-            <div className="mb-4 md:mb-6 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border border-blue-500/40 bg-blue-500/5">
-              <LuServer className="text-xl md:text-2xl text-blue-500" />
+          <div
+            ref={skill2Ref}
+            onMouseMove={skill2OnMouseMove}
+            onMouseLeave={skill2OnMouseLeave}
+            style={skill2Style}
+            data-cursor="hover"
+            className="relative rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 md:p-8 text-left hover:border-cyan-400/50 transition-colors duration-300"
+          >
+            <div data-tilt-glare className="pointer-events-none absolute inset-0 rounded-3xl" />
+            <div className="mb-4 md:mb-6 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border border-cyan-400/40 bg-cyan-400/5">
+              <LuServer className="text-xl md:text-2xl text-cyan-400" />
             </div>
 
             <h3 className="text-xl md:text-2xl font-bold text-white">
@@ -405,9 +495,17 @@ const Beranda = () => {
           </div>
 
           {/* Card 3 */}
-          <div className="rounded-3xl border border-slate-700 bg-slate-800 p-6 md:p-8 text-left hover:border-blue-500/50 hover:scale-105 transition-all duration-300">
-            <div className="mb-4 md:mb-6 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border border-blue-500/40 bg-blue-500/5">
-              <CiMobile2 className="text-xl md:text-2xl font-bold text-blue-500" />
+          <div
+            ref={skill3Ref}
+            onMouseMove={skill3OnMouseMove}
+            onMouseLeave={skill3OnMouseLeave}
+            style={skill3Style}
+            data-cursor="hover"
+            className="relative rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 md:p-8 text-left hover:border-cyan-400/50 transition-colors duration-300"
+          >
+            <div data-tilt-glare className="pointer-events-none absolute inset-0 rounded-3xl" />
+            <div className="mb-4 md:mb-6 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border border-cyan-400/40 bg-cyan-400/5">
+              <CiMobile2 className="text-xl md:text-2xl font-bold text-cyan-400" />
             </div>
 
             <h3 className="text-xl md:text-2xl font-bold text-white">
@@ -425,9 +523,17 @@ const Beranda = () => {
           </div>
 
           {/* Card 4 */}
-          <div className="rounded-3xl border border-slate-700 bg-slate-800 p-6 md:p-8 text-left hover:border-blue-500/50 hover:scale-105 transition-all duration-300">
-            <div className="mb-4 md:mb-6 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border border-blue-500/40 bg-blue-500/5">
-              <LuWrench className="text-xl md:text-2xl font-bold text-blue-500" />
+          <div
+            ref={skill4Ref}
+            onMouseMove={skill4OnMouseMove}
+            onMouseLeave={skill4OnMouseLeave}
+            style={skill4Style}
+            data-cursor="hover"
+            className="relative rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 md:p-8 text-left hover:border-cyan-400/50 transition-colors duration-300"
+          >
+            <div data-tilt-glare className="pointer-events-none absolute inset-0 rounded-3xl" />
+            <div className="mb-4 md:mb-6 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border border-cyan-400/40 bg-cyan-400/5">
+              <LuWrench className="text-xl md:text-2xl font-bold text-cyan-400" />
             </div>
 
             <h3 className="text-xl md:text-2xl font-bold text-white">
@@ -458,15 +564,17 @@ const Beranda = () => {
       {/* Featured Projects */}
       <div id="projects" className="mt-16 md:mt-20 flex flex-col items-center text-center px-4">
 
-        {/* Badge */}
-        <div className="inline-flex items-center rounded-full border border-blue-500/40 bg-blue-500/5 px-4 md:px-5 py-3 md:py-4 text-xs md:text-sm font-medium uppercase tracking-widest text-blue-500 animate-fadeIn">
-          FEATURED PROJECTS
-        </div>
+        <Reveal>
+          {/* Badge */}
+          <div className="inline-flex items-center rounded-full border border-cyan-400/40 bg-cyan-400/5 px-4 md:px-5 py-3 md:py-4 text-xs md:text-sm font-medium uppercase tracking-widest text-cyan-400">
+            FEATURED PROJECTS
+          </div>
 
-        {/* Judul */}
-        <h2 className="mt-4 md:mt-6 max-w-3xl text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-white animate-fadeIn delay-100">
-          Work I'm proud of
-        </h2>
+          {/* Judul */}
+          <h2 className="mt-4 md:mt-6 max-w-3xl text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-white">
+            Work I'm proud of
+          </h2>
+        </Reveal>
 
         <p className="mt-3 text-base md:text-lg lg:text-xl font-normal text-slate-400 animate-fadeIn delay-200">
           A selection of real projects showcasing full-stack web and mobile development.
@@ -476,13 +584,22 @@ const Beranda = () => {
         <div className="mt-12 grid w-full max-w-7xl grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 animate-fadeIn delay-300">
 
           {/* Card 1 */}
-          <div className="rounded-3xl border border-slate-700 bg-slate-800 text-left overflow-hidden hover:border-blue-500/50 transition-all duration-300">
+          <div
+            ref={project1Ref}
+            onMouseMove={project1OnMouseMove}
+            onMouseLeave={project1OnMouseLeave}
+            style={project1Style}
+            data-cursor="hover"
+            className="relative rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl text-left overflow-hidden hover:border-cyan-400/50 transition-colors duration-300"
+          >
+            <div data-tilt-glare className="pointer-events-none absolute inset-0 z-10 rounded-3xl" />
 
             {/* Gambar + Hover Overlay */}
             <a
               href="https://github.com/andika-x-pplg/netube"
               target="_blank"
               rel="noopener noreferrer"
+              data-cursor-text="View Code"
               className="group relative block w-full overflow-hidden"
             >
               <img
@@ -515,13 +632,13 @@ const Beranda = () => {
 
               {/* Teach */}
               <div className="mt-4 md:mt-6 flex flex-wrap gap-2 md:gap-3">
-                <span className="rounded-full border border-blue-500/40 bg-blue-500/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-blue-500">
+                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
                   Flutter
                 </span>
-                <span className="rounded-full border border-blue-500/40 bg-blue-500/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-blue-500">
+                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
                   Firebase
                 </span>
-                <span className="rounded-full border border-blue-500/40 bg-blue-500/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-blue-500">
+                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
                   Dart
                 </span>
               </div>
@@ -529,13 +646,22 @@ const Beranda = () => {
           </div>
 
           {/* Card 2 */}
-          <div className="rounded-3xl border border-slate-700 bg-slate-800 text-left overflow-hidden hover:border-blue-500/50 transition-all duration-300">
+          <div
+            ref={project2Ref}
+            onMouseMove={project2OnMouseMove}
+            onMouseLeave={project2OnMouseLeave}
+            style={project2Style}
+            data-cursor="hover"
+            className="relative rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl text-left overflow-hidden hover:border-cyan-400/50 transition-colors duration-300"
+          >
+            <div data-tilt-glare className="pointer-events-none absolute inset-0 z-10 rounded-3xl" />
 
             {/* Gambar + Hover Overlay */}
             <a
               href="https://github.com/andika-x-pplg/warung-nusantara"
               target="_blank"
               rel="noopener noreferrer"
+              data-cursor-text="View Code"
               className="group relative block w-full overflow-hidden"
             >
               <img
@@ -568,16 +694,16 @@ const Beranda = () => {
 
               {/* Teach */}
               <div className="mt-4 md:mt-6 flex flex-wrap gap-2 md:gap-3">
-                <span className="rounded-full border border-blue-500/40 bg-blue-500/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-blue-500">
+                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
                   React
                 </span>
-                <span className="rounded-full border border-blue-500/40 bg-blue-500/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-blue-500">
+                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
                   JavaScript
                 </span>
-                <span className="rounded-full border border-blue-500/40 bg-blue-500/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-blue-500">
+                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
                   CSS
                 </span>
-                <span className="rounded-full border border-blue-500/40 bg-blue-500/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-blue-500">
+                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
                   Local Storage
                 </span>
               </div>
@@ -585,13 +711,22 @@ const Beranda = () => {
           </div>
 
           {/* Card 3 */}
-          <div className="rounded-3xl border border-slate-700 bg-slate-800 text-left overflow-hidden hover:border-blue-500/50 transition-all duration-300">
+          <div
+            ref={project3Ref}
+            onMouseMove={project3OnMouseMove}
+            onMouseLeave={project3OnMouseLeave}
+            style={project3Style}
+            data-cursor="hover"
+            className="relative rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl text-left overflow-hidden hover:border-cyan-400/50 transition-colors duration-300"
+          >
+            <div data-tilt-glare className="pointer-events-none absolute inset-0 z-10 rounded-3xl" />
 
             {/* Gambar + Hover Overlay */}
             <a
               href="https://github.com/andika-x-pplg/portofolio-react"
               target="_blank"
               rel="noopener noreferrer"
+              data-cursor-text="View Code"
               className="group relative block w-full overflow-hidden"
             >
               <img
@@ -623,13 +758,13 @@ const Beranda = () => {
 
               {/* Teach */}
               <div className="mt-4 md:mt-6 flex flex-wrap gap-2 md:gap-3">
-                <span className="rounded-full border border-blue-500/40 bg-blue-500/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-blue-500">
+                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
                   React
                 </span>
-                <span className="rounded-full border border-blue-500/40 bg-blue-500/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-blue-500">
+                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
                   Tailwind CSS
                 </span>
-                <span className="rounded-full border border-blue-500/40 bg-blue-500/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-blue-500">
+                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
                   JavaScript
                 </span>
               </div>
@@ -643,15 +778,17 @@ const Beranda = () => {
       {/* Journey */}
       <div id="experience" className="mt-16 md:mt-20 flex flex-col items-center text-center px-4">
 
-        {/* Badge */}
-        <div className="inline-flex items-center rounded-full border border-blue-500/40 bg-blue-500/5 px-4 md:px-5 py-3 md:py-4 text-xs md:text-sm font-medium uppercase tracking-widest text-blue-500 animate-fadeIn">
-          JOURNEY
-        </div>
+        <Reveal axis="y">
+          {/* Badge */}
+          <div className="inline-flex items-center rounded-full border border-cyan-400/40 bg-cyan-400/5 px-4 md:px-5 py-3 md:py-4 text-xs md:text-sm font-medium uppercase tracking-widest text-cyan-400">
+            JOURNEY
+          </div>
 
-        {/* Judul */}
-        <h2 className="mt-4 md:mt-6 max-w-3xl text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-white animate-fadeIn delay-100">
-          Experience & growth
-        </h2>
+          {/* Judul */}
+          <h2 className="mt-4 md:mt-6 max-w-3xl text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-white">
+            Experience & growth
+          </h2>
+        </Reveal>
 
         <p className="mt-3 text-base md:text-lg lg:text-xl font-normal text-slate-400 animate-fadeIn delay-200">
           The path that shaped me as a developer.
@@ -659,10 +796,14 @@ const Beranda = () => {
 
 
         {/* Timeline */}
-        <div className="relative mt-12 md:mt-16 w-full max-w-6xl">
+        <div ref={timelineRef} className="relative mt-12 md:mt-16 w-full max-w-6xl">
 
-          {/* Garis Tengah - Hidden di mobile */}
-          <div className="hidden lg:block absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-blue-500">
+          {/* Garis Tengah - Hidden di mobile, animates drawing downward + traveling energy pulse */}
+          <div className="hidden lg:block absolute left-1/2 top-0 h-full w-px -translate-x-1/2 overflow-hidden">
+            <div className={`timeline-line h-full w-full bg-cyan-400/40 ${timelineInView ? 'is-visible' : ''}`} />
+            {timelineInView && (
+              <div className="timeline-pulse absolute left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-cyan-300 shadow-[0_0_12px_2px_rgba(34,211,238,0.8)]" />
+            )}
           </div>
 
 
@@ -671,11 +812,11 @@ const Beranda = () => {
 
             {/* Card */}
             <div className="lg:pr-12">
-              <div className="rounded-3xl border border-slate-700 bg-slate-800 p-6 md:p-8 text-left lg:text-right hover:border-blue-500/50 transition-all duration-300">
+              <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 md:p-8 text-left lg:text-right hover:border-cyan-400/50 transition-all duration-300">
 
                 {/* Badge + Tahun */}
                 <div className="flex flex-col sm:flex-row justify-start lg:justify-end items-start sm:items-center gap-2 sm:gap-4">
-                  <span className="rounded-full border border-purple-500/40 bg-purple-500/10 px-3 md:px-4 py-1.5 md:py-2 text-xs md:text-sm text-purple-400">
+                  <span className="rounded-full border border-cyan-400/40 bg-cyan-400/10 px-3 md:px-4 py-1.5 md:py-2 text-xs md:text-sm text-cyan-300">
                     Internship
                   </span>
 
@@ -690,7 +831,7 @@ const Beranda = () => {
                 </h3>
 
                 {/* Perusahaan */}
-                <p className="mt-1 text-base md:text-lg text-blue-500">
+                <p className="mt-1 text-base md:text-lg text-cyan-400">
                   APTMI
                 </p>
 
@@ -706,9 +847,15 @@ const Beranda = () => {
 
 
             {/* Icon tengah - Hidden di mobile */}
-            <div className="hidden lg:flex absolute left-1/2 top-5 h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-blue-500">
+            <div className="hidden lg:flex absolute left-1/2 top-5 h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-cyan-400 animate-ringPulse">
               <LuBriefcaseBusiness className="text-xl text-white" />
             </div>
+
+            {/* Connector - Hidden di mobile */}
+            <div
+              style={{ transformOrigin: 'right' }}
+              className={`hidden lg:block timeline-connector absolute right-1/2 top-9 h-px w-12 bg-cyan-400/50 ${timelineInView ? 'is-visible' : ''}`}
+            />
 
           </div>
 
@@ -717,11 +864,11 @@ const Beranda = () => {
 
             {/* Card */}
             <div className="lg:col-start-2 lg:pl-12">
-              <div className="rounded-3xl border border-slate-700 bg-slate-800 p-6 md:p-8 text-left hover:border-blue-500/50 transition-all duration-300">
+              <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 md:p-8 text-left hover:border-cyan-400/50 transition-all duration-300">
 
                 {/* Badge + Tahun */}
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
-                  <span className="rounded-full border border-purple-500/40 bg-purple-500/10 px-3 md:px-4 py-1.5 md:py-2 text-xs md:text-sm text-purple-400">
+                  <span className="rounded-full border border-cyan-400/40 bg-cyan-400/10 px-3 md:px-4 py-1.5 md:py-2 text-xs md:text-sm text-cyan-300">
                     Projects
                   </span>
 
@@ -736,7 +883,7 @@ const Beranda = () => {
                 </h3>
 
                 {/* Keterangan */}
-                <p className="mt-1 text-base md:text-lg text-blue-500">
+                <p className="mt-1 text-base md:text-lg text-cyan-400">
                   Self-directed
                 </p>
 
@@ -751,9 +898,12 @@ const Beranda = () => {
             </div>
 
             {/* Icons Tengah - Hidden di mobile */}
-            <div className="hidden lg:flex absolute left-1/2 top-5 h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-blue-500">
+            <div className="hidden lg:flex absolute left-1/2 top-5 h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-cyan-400 animate-ringPulse">
               <LuBriefcaseBusiness className="text-xl text-white" />
             </div>
+
+            {/* Connector - Hidden di mobile */}
+            <div className={`hidden lg:block timeline-connector absolute left-1/2 top-9 h-px w-12 bg-cyan-400/50 ${timelineInView ? 'is-visible' : ''}`} />
 
           </div>
 
@@ -762,11 +912,11 @@ const Beranda = () => {
 
             {/* Card */}
             <div className="lg:pr-12">
-              <div className="rounded-3xl border border-slate-700 bg-slate-800 p-6 md:p-8 text-left lg:text-right hover:border-blue-500/50 transition-all duration-300">
+              <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 md:p-8 text-left lg:text-right hover:border-cyan-400/50 transition-all duration-300">
 
                 {/* Badge + Tahun */}
                 <div className="flex flex-col sm:flex-row justify-start lg:justify-end items-start sm:items-center gap-2 sm:gap-4">
-                  <span className="rounded-full border border-purple-500/40 bg-purple-500/10 px-3 md:px-4 py-1.5 md:py-2 text-xs md:text-sm text-purple-400">
+                  <span className="rounded-full border border-cyan-400/40 bg-cyan-400/10 px-3 md:px-4 py-1.5 md:py-2 text-xs md:text-sm text-cyan-300">
                     Learning
                   </span>
 
@@ -781,7 +931,7 @@ const Beranda = () => {
                 </h3>
 
                 {/* Perusahaan */}
-                <p className="mt-1 text-base md:text-lg text-blue-500">
+                <p className="mt-1 text-base md:text-lg text-cyan-400">
                   Continuous Growth
                 </p>
 
@@ -796,9 +946,15 @@ const Beranda = () => {
 
 
             {/* Icon tengah - Hidden di mobile */}
-            <div className="hidden lg:flex absolute left-1/2 top-5 h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-blue-500">
+            <div className="hidden lg:flex absolute left-1/2 top-5 h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-cyan-400 animate-ringPulse">
               <LuBriefcaseBusiness className="text-xl text-white" />
             </div>
+
+            {/* Connector - Hidden di mobile */}
+            <div
+              style={{ transformOrigin: 'right' }}
+              className={`hidden lg:block timeline-connector absolute right-1/2 top-9 h-px w-12 bg-cyan-400/50 ${timelineInView ? 'is-visible' : ''}`}
+            />
 
           </div>
 
@@ -808,7 +964,7 @@ const Beranda = () => {
 
       {/* Stastics */}
       <div className="mt-16 md:mt-20 w-full px-4 md:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 rounded-3xl border border-slate-700 bg-slate-800 px-6 md:px-10 py-8 md:py-12 text-center gap-6 lg:gap-0 animate-fadeIn">
+        <div className="grid grid-cols-2 lg:grid-cols-4 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl px-6 md:px-10 py-8 md:py-12 text-center gap-6 lg:gap-0 animate-fadeIn">
 
           {/* Start 1 */}
           <Stat end={10} suffix="+" label="Projects Completed" />
@@ -828,21 +984,23 @@ const Beranda = () => {
       {/* TECH STACK */}
       <div className="mt-16 md:mt-20 flex flex-col items-center text-center px-4">
 
+        <Reveal>
         {/* Badge */}
-        <div className="inline-flex items-center rounded-full border border-blue-500/40 bg-blue-500/5 px-4 md:px-5 py-3 md:py-4 text-xs md:text-sm font-medium uppercase tracking-widest text-blue-500 animate-fadeIn">
+        <div className="inline-flex items-center rounded-full border border-cyan-400/40 bg-cyan-400/5 px-4 md:px-5 py-3 md:py-4 text-xs md:text-sm font-medium uppercase tracking-widest text-cyan-400">
           TECH STACK
         </div>
 
         {/* Judul */}
-        <h2 className="mt-4 md:mt-6 max-w-3xl text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-white animate-fadeIn delay-100">
+        <h2 className="mt-4 md:mt-6 max-w-3xl text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-white">
           Technologies I work with
         </h2>
+        </Reveal>
 
         {/* Tech Stack Cards */}
         <div className="mt-12 md:mt-16 grid w-full max-w-7xl grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-5 animate-fadeIn delay-200">
 
           {/* React */}
-          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-slate-700 bg-slate-800 transition hover:border-cyan-400 hover:scale-105 hover:shadow-lg hover:shadow-cyan-400/20">
+          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-cyan-400 hover:scale-105 hover:shadow-lg hover:shadow-cyan-400/20">
             <FaReact className="text-4xl md:text-5xl text-cyan-400" />
             <p className="mt-3 md:mt-4 text-sm md:text-base font-medium text-slate-400">
               React
@@ -850,7 +1008,7 @@ const Beranda = () => {
           </div>
 
           {/* Laravel */}
-          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-slate-700 bg-slate-800 transition hover:border-red-500 hover:scale-105 hover:shadow-lg hover:shadow-red-500/20">
+          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-red-500 hover:scale-105 hover:shadow-lg hover:shadow-red-500/20">
             <FaLaravel className='text-red-500 text-4xl md:text-5xl' />
             <p className="mt-3 md:mt-4 text-sm md:text-base font-medium text-slate-400">
               Laravel
@@ -858,15 +1016,15 @@ const Beranda = () => {
           </div>
 
           {/* Flutter */}
-          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-slate-700 bg-slate-800 transition hover:border-blue-500 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20">
-            <FaFlutter className='text-blue-500 text-4xl md:text-5xl' />
+          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-sky-500 hover:scale-105 hover:shadow-lg hover:shadow-sky-500/20">
+            <FaFlutter className='text-sky-500 text-4xl md:text-5xl' />
             <p className="mt-3 md:mt-4 text-sm md:text-base font-medium text-slate-400">
               Flutter
             </p>
           </div>
 
           {/* PHP */}
-          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-slate-700 bg-slate-800 transition hover:border-[#777cb5] hover:scale-105 hover:shadow-lg hover:shadow-[#777cb5]/20">
+          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-[#777cb5] hover:scale-105 hover:shadow-lg hover:shadow-[#777cb5]/20">
             <FaPhp className='text-[#777cb5] text-4xl md:text-5xl' />
             <p className="mt-3 md:mt-4 text-sm md:text-base font-medium text-slate-400">
               PHP
@@ -874,7 +1032,7 @@ const Beranda = () => {
           </div>
 
           {/* JavaScript */}
-          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-slate-700 bg-slate-800 transition hover:border-yellow-300 hover:scale-105 hover:shadow-lg hover:shadow-yellow-300/20">
+          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-yellow-300 hover:scale-105 hover:shadow-lg hover:shadow-yellow-300/20">
             <BiLogoJavascript className='text-yellow-300 text-4xl md:text-5xl' />
             <p className="mt-3 md:mt-4 text-sm md:text-base font-medium text-slate-400">
               JavaScript
@@ -882,15 +1040,15 @@ const Beranda = () => {
           </div>
 
           {/* MySql */}
-          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-slate-700 bg-slate-800 transition hover:border-blue-500 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20">
-            <SiMysql className='text-blue-500 text-4xl md:text-5xl' />
+          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-sky-500 hover:scale-105 hover:shadow-lg hover:shadow-sky-500/20">
+            <SiMysql className='text-sky-500 text-4xl md:text-5xl' />
             <p className="mt-3 md:mt-4 text-sm md:text-base font-medium text-slate-400">
               MySQL
             </p>
           </div>
 
           {/* Firebase */}
-          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-slate-700 bg-slate-800 transition hover:border-[#ffc929] hover:scale-105 hover:shadow-lg hover:shadow-[#ffc929]/20">
+          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-[#ffc929] hover:scale-105 hover:shadow-lg hover:shadow-[#ffc929]/20">
             <SiFirebase className='text-[#ffc929] text-4xl md:text-5xl' />
             <p className="mt-3 md:mt-4 text-sm md:text-base font-medium text-slate-400">
               Firebase
@@ -898,7 +1056,7 @@ const Beranda = () => {
           </div>
 
           {/* Git */}
-          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-slate-700 bg-slate-800 transition hover:border-[#f04f32] hover:scale-105 hover:shadow-lg hover:shadow-[#f04f32]/20">
+          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-[#f04f32] hover:scale-105 hover:shadow-lg hover:shadow-[#f04f32]/20">
             <FaGitAlt className='text-[#f04f32] text-4xl md:text-5xl' />
             <p className="mt-3 md:mt-4 text-sm md:text-base font-medium text-slate-400">
               Git
@@ -906,7 +1064,7 @@ const Beranda = () => {
           </div>
 
           {/* Github */}
-          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-slate-700 bg-slate-800 transition hover:border-white hover:scale-105 hover:shadow-lg hover:shadow-white/20">
+          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-white hover:scale-105 hover:shadow-lg hover:shadow-white/20">
             <FaGithub className='text-white text-4xl md:text-5xl' />
             <p className="mt-3 md:mt-4 text-sm md:text-base font-medium text-slate-400">
               Github
@@ -914,7 +1072,7 @@ const Beranda = () => {
           </div>
 
           {/* Tailwind CSS */}
-          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-slate-700 bg-slate-800 transition hover:border-cyan-500 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20">
+          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-cyan-500 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20">
             <SiTailwindcss className='text-cyan-500 text-4xl md:text-5xl' />
             <p className="mt-3 md:mt-4 text-sm md:text-base font-medium text-slate-400">
               Tailwind CSS
@@ -922,7 +1080,7 @@ const Beranda = () => {
           </div>
 
           {/* HTML */}
-          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-slate-700 bg-slate-800 transition hover:border-[#e34c27] hover:scale-105 hover:shadow-lg hover:shadow-[#e34c27]/20">
+          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-[#e34c27] hover:scale-105 hover:shadow-lg hover:shadow-[#e34c27]/20">
             <FaHtml5 className='text-[#e34c27] text-4xl md:text-5xl' />
             <p className="mt-3 md:mt-4 text-sm md:text-base font-medium text-slate-400">
               HTML
@@ -930,7 +1088,7 @@ const Beranda = () => {
           </div>
 
           {/* CSS */}
-          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-slate-700 bg-slate-800 transition hover:border-[#274ce3] hover:scale-105 hover:shadow-lg hover:shadow-[#274ce3]/20">
+          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-[#274ce3] hover:scale-105 hover:shadow-lg hover:shadow-[#274ce3]/20">
             <FaCss3Alt className='text-[#274ce3] text-4xl md:text-5xl' />
             <p className="mt-3 md:mt-4 text-sm md:text-base font-medium text-slate-400">
               CSS
@@ -938,7 +1096,7 @@ const Beranda = () => {
           </div>
 
           {/* Java */}
-          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-slate-700 bg-slate-800 transition hover:border-white hover:scale-105 hover:shadow-lg hover:shadow-white/20">
+          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-white hover:scale-105 hover:shadow-lg hover:shadow-white/20">
             <FaJava className='text-white text-4xl md:text-5xl' />
             <p className="mt-3 md:mt-4 text-sm md:text-base font-medium text-slate-400">
               Java
@@ -946,7 +1104,7 @@ const Beranda = () => {
           </div>
 
           {/* Gitlab */}
-          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-slate-700 bg-slate-800 transition hover:border-orange-500 hover:scale-105 hover:shadow-lg hover:shadow-orange-500/20">
+          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-orange-500 hover:scale-105 hover:shadow-lg hover:shadow-orange-500/20">
             <FaGitlab className='text-orange-500 text-4xl md:text-5xl' />
             <p className="mt-3 md:mt-4 text-sm md:text-base font-medium text-slate-400">
               Gitlab
@@ -954,7 +1112,7 @@ const Beranda = () => {
           </div>
 
           {/* Ionic */}
-          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-slate-700 bg-slate-800 transition hover:border-cyan-500 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20">
+          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-cyan-500 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20">
             <IoLogoIonic className='text-cyan-500 text-4xl md:text-5xl' />
             <p className="mt-3 md:mt-4 text-sm md:text-base font-medium text-slate-400">
               Ionic
@@ -967,15 +1125,17 @@ const Beranda = () => {
       {/* Achivements */}
       <div className="mt-16 md:mt-20 flex flex-col items-center text-center px-4">
 
-        {/* Badge */}
-        <div className="inline-flex items-center rounded-full border border-blue-500/40 bg-blue-500/5 px-4 md:px-5 py-3 md:py-4 text-xs md:text-sm font-medium uppercase tracking-widest text-blue-500 animate-fadeIn">
-          Certificates
-        </div>
+        <Reveal axis="y">
+          {/* Badge */}
+          <div className="inline-flex items-center rounded-full border border-cyan-400/40 bg-cyan-400/5 px-4 md:px-5 py-3 md:py-4 text-xs md:text-sm font-medium uppercase tracking-widest text-cyan-400">
+            Certificates
+          </div>
 
-        {/* Judul */}
-        <h2 className="mt-4 md:mt-6 max-w-3xl text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-white animate-fadeIn delay-100">
-          Certifications & achievements
-        </h2>
+          {/* Judul */}
+          <h2 className="mt-4 md:mt-6 max-w-3xl text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-white">
+            Certifications & achievements
+          </h2>
+        </Reveal>
 
         <p className="mt-3 text-base md:text-lg lg:text-xl font-normal text-slate-400 animate-fadeIn delay-200">
           Proof of continuous learning across the modern development stack.
@@ -984,18 +1144,26 @@ const Beranda = () => {
         {/* Certificate Card */}
         <div className="mt-12 md:mt-16 w-full max-w-sm animate-fadeIn delay-300">
 
-          <div className="mx-auto w-full overflow-hidden rounded-3xl border border-slate-700 bg-slate-800 hover:border-blue-500/50 transition-all duration-300">
+          <div
+            ref={certRef}
+            onMouseMove={certOnMouseMove}
+            onMouseLeave={certOnMouseLeave}
+            style={certStyle}
+            data-cursor="hover"
+            className="relative mx-auto w-full overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl hover:border-cyan-400/50 transition-colors duration-300"
+          >
+            <div data-tilt-glare className="pointer-events-none absolute inset-0 z-10 rounded-3xl" />
 
             {/* Bagian Atas */}
-            <div className="flex h-48 md:h-56 lg:h-64 items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900">
-              <LuAward className="text-5xl md:text-6xl text-blue-500" />
+            <div className="flex h-48 md:h-56 lg:h-64 items-center justify-center bg-slate-900">
+              <LuAward className="text-5xl md:text-6xl text-cyan-400" />
             </div>
 
             {/* Isi Card */}
             <div className="p-5 md:p-6 text-left">
 
               {/* Tahun */}
-              <p className="text-xs md:text-sm font-medium text-purple-400">
+              <p className="text-xs md:text-sm font-medium text-cyan-300">
                 2024
               </p>
 
@@ -1021,17 +1189,19 @@ const Beranda = () => {
       {/* Kontak */}
       <div id="contact" className="mt-16 md:mt-20 flex flex-col items-center text-center px-4">
 
-        {/* Badge */}
-        <div className="inline-flex items-center rounded-full border border-blue-500/40 bg-blue-500/5 px-4 md:px-5 py-3 md:py-4 text-xs md:text-sm font-medium uppercase tracking-widest text-blue-500 animate-fadeIn">
-          CONTACT
-        </div>
+        <Reveal>
+          {/* Badge */}
+          <div className="inline-flex items-center rounded-full border border-cyan-400/40 bg-cyan-400/5 px-4 md:px-5 py-3 md:py-4 text-xs md:text-sm font-medium uppercase tracking-widest text-cyan-400">
+            CONTACT
+          </div>
 
-        {/* Judul */}
-        <h2 className="mt-4 md:mt-6 max-w-3xl text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-white animate-fadeIn delay-100">
-          Let's build
-          <br />
-          something together
-        </h2>
+          {/* Judul */}
+          <h2 className="mt-4 md:mt-6 max-w-3xl text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-white">
+            Let's build
+            <br />
+            something together
+          </h2>
+        </Reveal>
 
         <p className="mt-3 text-base md:text-lg lg:text-xl font-normal text-slate-400 animate-fadeIn delay-200">
           Have a project in mind or just want to say hi? My inbox is always open.
@@ -1042,7 +1212,7 @@ const Beranda = () => {
         <div className="mt-12 md:mt-16 grid w-full max-w-7xl grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10 animate-fadeIn delay-300">
 
           {/* ================= LEFT CARD ================= */}
-          <div className="rounded-3xl border border-slate-700 bg-slate-800 p-6 md:p-10 text-left hover:border-blue-500/50 transition-all duration-300">
+          <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 md:p-10 text-left hover:border-cyan-400/50 transition-all duration-300">
 
             {/* Judul */}
             <h3 className="text-xl md:text-2xl font-bold text-white">
@@ -1059,8 +1229,8 @@ const Beranda = () => {
             {/* Email */}
             <div className="mt-8 md:mt-10 flex items-center gap-3 md:gap-4">
 
-              <div className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full bg-blue-500/20">
-                <MdEmail className="text-lg md:text-2xl text-blue-500" />
+              <div className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full bg-cyan-400/20">
+                <MdEmail className="text-lg md:text-2xl text-cyan-400" />
               </div>
 
               <span className="text-sm md:text-base lg:text-lg text-slate-400 break-all">
@@ -1073,8 +1243,8 @@ const Beranda = () => {
             {/* Lokasi */}
             <div className="mt-4 md:mt-5 flex items-center gap-3 md:gap-4">
 
-              <div className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full bg-purple-500/20">
-                <MdLocationOn className="text-lg md:text-2xl text-purple-400" />
+              <div className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full bg-cyan-400/20">
+                <MdLocationOn className="text-lg md:text-2xl text-cyan-300" />
               </div>
 
               <span className="text-sm md:text-base lg:text-lg text-slate-400">
@@ -1092,10 +1262,10 @@ const Beranda = () => {
                 href="https://github.com/andika-x-pplg"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border border-slate-700 bg-slate-800 transition hover:border-blue-500 hover:text-blue-500 hover:scale-110"
+                className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-cyan-400 hover:text-cyan-400 hover:scale-110"
                 aria-label="GitHub"
               >
-                <FaGithub className="text-xl md:text-2xl text-slate-400 hover:text-blue-500" />
+                <FaGithub className="text-xl md:text-2xl text-slate-400 hover:text-cyan-400" />
               </a>
 
 
@@ -1104,10 +1274,10 @@ const Beranda = () => {
                 href="https://www.tiktok.com/@dik9893"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border border-slate-700 bg-slate-800 transition hover:border-blue-500 hover:text-blue-500 hover:scale-110"
+                className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-cyan-400 hover:text-cyan-400 hover:scale-110"
                 aria-label="TikTok"
               >
-                <FaTiktok className="text-xl md:text-2xl text-slate-400 hover:text-blue-500" />
+                <FaTiktok className="text-xl md:text-2xl text-slate-400 hover:text-cyan-400" />
               </a>
 
 
@@ -1116,10 +1286,10 @@ const Beranda = () => {
                 href="https://www.instagram.com/andika_esda_saputra?igsi=MWx4d291dncxdHVzeA=="
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border border-slate-700 bg-slate-800 transition hover:border-blue-500 hover:text-blue-500 hover:scale-110"
+                className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-cyan-400 hover:text-cyan-400 hover:scale-110"
                 aria-label="Instagram"
               >
-                <FaInstagram className="text-xl md:text-2xl text-slate-400 hover:text-blue-500" />
+                <FaInstagram className="text-xl md:text-2xl text-slate-400 hover:text-cyan-400" />
               </a>
 
             </div>
@@ -1128,7 +1298,7 @@ const Beranda = () => {
 
 
           {/* ================= RIGHT CARD ================= */}
-          <div className="rounded-3xl border border-slate-700 bg-slate-800 p-6 md:p-10 text-left hover:border-blue-500/50 transition-all duration-300">
+          <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 md:p-10 text-left hover:border-cyan-400/50 transition-all duration-300">
 
             <form onSubmit={handleSubmit}>
 
@@ -1148,7 +1318,7 @@ const Beranda = () => {
                     onChange={handleInputChange}
                     placeholder="Your name"
                     required
-                    className="mt-2 md:mt-3 w-full rounded-full border border-slate-700 bg-slate-700/60 px-4 md:px-6 py-3 md:py-4 text-sm md:text-base lg:text-lg text-white outline-none placeholder:text-slate-500 focus:border-blue-500"
+                    className="mt-2 md:mt-3 w-full rounded-full border border-slate-700 bg-slate-700/60 px-4 md:px-6 py-3 md:py-4 text-sm md:text-base lg:text-lg text-white outline-none placeholder:text-slate-500 focus:border-cyan-400"
                   />
                 </div>
 
@@ -1166,7 +1336,7 @@ const Beranda = () => {
                     onChange={handleInputChange}
                     placeholder="you@email.com"
                     required
-                    className="mt-2 md:mt-3 w-full rounded-full border border-slate-700 bg-slate-700/60 px-4 md:px-6 py-3 md:py-4 text-sm md:text-base lg:text-lg text-white outline-none placeholder:text-slate-500 focus:border-blue-500"
+                    className="mt-2 md:mt-3 w-full rounded-full border border-slate-700 bg-slate-700/60 px-4 md:px-6 py-3 md:py-4 text-sm md:text-base lg:text-lg text-white outline-none placeholder:text-slate-500 focus:border-cyan-400"
                   />
                 </div>
 
@@ -1187,7 +1357,7 @@ const Beranda = () => {
                   rows="5"
                   placeholder="Tell me about your project..."
                   required
-                  className="mt-2 md:mt-3 w-full resize-none rounded-3xl border border-slate-700 bg-slate-700/60 px-4 md:px-6 py-4 md:py-5 text-sm md:text-base lg:text-lg text-white outline-none placeholder:text-slate-500 focus:border-blue-500"
+                  className="mt-2 md:mt-3 w-full resize-none rounded-3xl border border-slate-700 bg-slate-700/60 px-4 md:px-6 py-4 md:py-5 text-sm md:text-base lg:text-lg text-white outline-none placeholder:text-slate-500 focus:border-cyan-400"
                 />
 
               </div>
@@ -1201,8 +1371,14 @@ const Beranda = () => {
 
               {/* Button */}
               <button
+                ref={smRef}
+                onMouseMove={smOnMouseMove}
+                onMouseLeave={smOnMouseLeave}
+                style={smStyle}
                 type="submit"
-                className="mt-6 md:mt-8 flex w-full items-center justify-center gap-2 md:gap-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 px-5 md:px-6 py-3 md:py-4 text-sm md:text-base lg:text-lg font-semibold text-white transition hover:scale-[1.01] hover:shadow-lg hover:shadow-blue-500/20"
+                data-cursor="hover"
+                data-cursor-text="Send"
+                className="mt-6 md:mt-8 flex w-full items-center justify-center gap-2 md:gap-3 rounded-full bg-cyan-500 px-5 md:px-6 py-3 md:py-4 text-sm md:text-base lg:text-lg font-semibold text-white transition hover:bg-cyan-400 hover:scale-[1.01] hover:shadow-lg hover:shadow-cyan-400/20"
               >
                 <MdOutlineRocketLaunch className="text-lg md:text-2xl" />
                 Send Message
@@ -1219,7 +1395,7 @@ const Beranda = () => {
       {/* Footer */}
       <footer className="mt-16 md:mt-20 px-4 md:px-8 pb-6 md:pb-8">
 
-        <div className="rounded-3xl border border-slate-700 bg-slate-800 p-6 md:p-10">
+        <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 md:p-10">
 
           {/* Bagian Atas */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start gap-8 md:gap-10">
@@ -1230,7 +1406,7 @@ const Beranda = () => {
               {/* Logo + Nama */}
               <div className="flex items-center gap-3">
 
-                <div className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-purple-500">
+                <div className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full bg-cyan-500">
                   <span className="text-base md:text-lg font-bold text-white">
                     AE
                   </span>
@@ -1253,7 +1429,7 @@ const Beranda = () => {
             {/* Navigation */}
             <div className="flex justify-start md:justify-center">
 
-              <nav className="grid grid-cols-2 sm:flex sm:flex-wrap items-start sm:items-center gap-4 sm:gap-6 md:gap-8">
+              <nav className="grid grid-cols-2 sm:flex sm:flex items-start sm:items-center gap-4 sm:gap-6 md:gap-8">
 
                 <a
                   href="#hero"
@@ -1310,10 +1486,10 @@ const Beranda = () => {
                 href="https://github.com/andika-x-pplg"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border border-slate-700 bg-slate-700/40 transition hover:border-blue-500 hover:bg-blue-500/10 hover:scale-110"
+                className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border border-slate-700 bg-slate-700/40 transition hover:border-cyan-400 hover:bg-cyan-400/10 hover:scale-110"
                 aria-label="GitHub"
               >
-                <FaGithub className="text-xl md:text-2xl text-slate-400 hover:text-blue-500" />
+                <FaGithub className="text-xl md:text-2xl text-slate-400 hover:text-cyan-400" />
               </a>
 
               {/* TikTok */}
@@ -1321,10 +1497,10 @@ const Beranda = () => {
                 href="https://www.tiktok.com/@dik9893"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border border-slate-700 bg-slate-700/40 transition hover:border-blue-500 hover:bg-blue-500/10 hover:scale-110"
+                className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border border-slate-700 bg-slate-700/40 transition hover:border-cyan-400 hover:bg-cyan-400/10 hover:scale-110"
                 aria-label="TikTok"
               >
-                <FaTiktok className="text-xl md:text-2xl text-slate-400 hover:text-blue-500" />
+                <FaTiktok className="text-xl md:text-2xl text-slate-400 hover:text-cyan-400" />
               </a>
 
               {/* Instagram */}
@@ -1332,10 +1508,10 @@ const Beranda = () => {
                 href="https://www.instagram.com/andika_esda_saputra?igsi=MWx4d291dncxdHVzeA=="
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border border-slate-700 bg-slate-700/40 transition hover:border-blue-500 hover:bg-blue-500/10 hover:scale-110"
+                className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full border border-slate-700 bg-slate-700/40 transition hover:border-cyan-400 hover:bg-cyan-400/10 hover:scale-110"
                 aria-label="Instagram"
               >
-                <FaInstagram className="text-xl md:text-2xl text-slate-400 hover:text-blue-500" />
+                <FaInstagram className="text-xl md:text-2xl text-slate-400 hover:text-cyan-400" />
               </a>
 
             </div>
@@ -1359,7 +1535,7 @@ const Beranda = () => {
             {/* Back To Top */}
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="flex items-center gap-2 rounded-full border border-slate-700 bg-slate-700/40 px-4 md:px-6 py-2 md:py-3 text-xs sm:text-sm md:text-base font-medium text-slate-400 transition hover:border-blue-500 hover:text-white hover:scale-105"
+              className="flex items-center gap-2 rounded-full border border-slate-700 bg-slate-700/40 px-4 md:px-6 py-2 md:py-3 text-xs sm:text-sm md:text-base font-medium text-slate-400 transition hover:border-cyan-400 hover:text-white hover:scale-105"
             >
               Back to Top
               <MdKeyboardArrowUp className="text-lg md:text-xl" />

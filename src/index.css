@@ -16,10 +16,20 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-    to bottom,
-    #3b82f6,
-    #8b5cf6
-  );
+  background: #22d3ee;
   border-radius: 999px;
+}
+
+::selection {
+  background: rgba(34, 211, 238, 0.35);
+  color: #fff;
+}
+
+/* Custom cursor: only hide the native cursor on fine pointers once
+   CustomCursor has mounted, so touch devices keep default behavior. */
+@media (hover: hover) and (pointer: fine) {
+  html.custom-cursor-active,
+  html.custom-cursor-active * {
+    cursor: none !important;
+  }
 }
