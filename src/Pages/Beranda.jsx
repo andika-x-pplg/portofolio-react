@@ -11,6 +11,7 @@ import { IoLogoIonic } from 'react-icons/io';
 import netubeImage from "../assets/gambar/netube.png";
 import WarungNusantaraImage from "../assets/gambar/WarungNusantara.png";
 import portofolioImage from "../assets//gambar/portofolio.png";
+import gamevaultImage from "../assets/gambar/gamevault.png";
 import andikaImage from "../assets/gambar/andika.png";
 import 'animate.css'
 import { useInView } from 'react-intersection-observer';
@@ -46,6 +47,7 @@ const Beranda = () => {
   const { ref: project1Ref, onMouseMove: project1OnMouseMove, onMouseLeave: project1OnMouseLeave, style: project1Style } = useTilt({ max: 5, scale: 1.015 });
   const { ref: project2Ref, onMouseMove: project2OnMouseMove, onMouseLeave: project2OnMouseLeave, style: project2Style } = useTilt({ max: 5, scale: 1.015 });
   const { ref: project3Ref, onMouseMove: project3OnMouseMove, onMouseLeave: project3OnMouseLeave, style: project3Style } = useTilt({ max: 5, scale: 1.015 });
+  const { ref: project4Ref, onMouseMove: project4OnMouseMove, onMouseLeave: project4OnMouseLeave, style: project4Style } = useTilt({ max: 5, scale: 1.015 });
 
   // Handler untuk perubahan input
   const handleInputChange = (e) => {
@@ -766,6 +768,73 @@ const Beranda = () => {
                 </span>
                 <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
                   JavaScript
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 4 */}
+          <div
+            ref={project4Ref}
+            onMouseMove={project4OnMouseMove}
+            onMouseLeave={project4OnMouseLeave}
+            style={project4Style}
+            data-cursor="hover"
+            className="relative rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl text-left overflow-hidden hover:border-cyan-400/50 transition-colors duration-300"
+          >
+            <div data-tilt-glare className="pointer-events-none absolute inset-0 z-10 rounded-3xl" />
+
+            {/* Gambar + Hover Overlay */}
+            <a
+              href="https://github.com/andika-x-pplg/gamevault-web"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor-text="View Code"
+              className="group relative block w-full overflow-hidden"
+            >
+              <img
+                src={gamevaultImage}
+                alt="GameVault"
+                className="h-48 md:h-64 lg:h-80 w-full object-cover transition-all duration-500 ease-out group-hover:scale-110 group-hover:blur-sm"
+              />
+
+              {/* Overlay */}
+              <div className="absolute inset-0 flex items-center justify-center bg-slate-950/50 opacity-0 backdrop-blur-[2px] transition-all duration-300 group-hover:opacity-100">
+                <div className="flex flex-col items-center gap-3 text-white">
+                  <FaGithub className="text-3xl md:text-4xl lg:text-5xl" />
+                  <span className="text-base md:text-lg lg:text-xl font-semibold">
+                    Game Vault
+                  </span>
+                </div>
+              </div>
+            </a>
+
+            {/* Isi Card */}
+            <div className="p-6 md:p-8">
+              <h3 className="text-xl md:text-2xl font-bold text-white">
+                Game Vault
+              </h3>
+
+              <p className="mt-3 md:mt-4 text-sm md:text-base lg:text-lg leading-relaxed text-slate-400">
+                GameVault is a game discovery and distribution platform inspired by modern game storefront experiences.
+              </p>
+
+              {/* Teach */}
+              <div className="mt-4 md:mt-6 flex flex-wrap gap-2 md:gap-3">
+                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
+                  React
+                </span>
+                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
+                  Tailwind CSS
+                </span>
+                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
+                  PHP
+                </span>
+                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
+                  Laravel
+                </span>
+                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
+                  MySql
                 </span>
               </div>
             </div>
