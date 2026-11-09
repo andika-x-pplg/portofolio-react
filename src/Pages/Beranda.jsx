@@ -1,17 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Index from '../components/HeroRole/Index'
 import { FaGithub, FaTiktok, FaInstagram, FaCode, FaReact, FaLaravel, FaPhp, FaGitAlt, FaHtml5, FaCss3Alt, FaJava, } from "react-icons/fa";
 import { MdEmail, MdOutlineRocketLaunch, MdLocationOn, MdKeyboardArrowUp } from "react-icons/md";
-import { LuSparkles, LuGraduationCap, LuPanelsTopLeft, LuServer, LuWrench, LuBriefcaseBusiness, LuAward } from 'react-icons/lu';
+import { LuSparkles, LuGraduationCap, LuPanelsTopLeft, LuServer, LuWrench, LuBriefcaseBusiness, LuAward, LuChevronDown } from 'react-icons/lu';
 import { CiMobile2 } from 'react-icons/ci';
 import { BiLogoJavascript } from 'react-icons/bi';
-import { SiMysql, SiFirebase, SiTailwindcss } from 'react-icons/si';
+import { SiMysql, SiFirebase, SiTailwindcss, SiCplusplus } from 'react-icons/si';
 import { FaFlutter, FaGitlab } from 'react-icons/fa6';
 import { IoLogoIonic } from 'react-icons/io';
-import netubeImage from "../assets/gambar/netube.png";
-import WarungNusantaraImage from "../assets/gambar/WarungNusantara.png";
-import portofolioImage from "../assets//gambar/portofolio.png";
-import gamevaultImage from "../assets/gambar/gamevault.png";
 import andikaImage from "../assets/gambar/andika.png";
 import 'animate.css'
 import { useInView } from 'react-intersection-observer';
@@ -19,6 +15,8 @@ import Reveal from '../components/Reveal/Reveal';
 import HeroSparkles from '../components/HeroSparkles/HeroSparkles';
 import { useTilt } from '../hooks/useTilt';
 import { useMagnetic } from '../hooks/useMagnetic';
+import { projectsData } from '../data/projects';
+import ProjectCard from '../components/projects/ProjectCard';
 
 const Beranda = () => {
   // State untuk form contact
@@ -29,6 +27,20 @@ const Beranda = () => {
   });
 
   const [formStatus, setFormStatus] = useState('');
+  const [showAllProjects, setShowAllProjects] = useState(false);
+  const projectsSectionRef = useRef(null);
+
+  const toggleShowProjects = () => {
+    if (showAllProjects) {
+      // Saat menutup, scroll halus dan presisi ke posisi projects section agar tidak glitch/loncat ke bawah
+      if (projectsSectionRef.current) {
+        projectsSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      setShowAllProjects(false);
+    } else {
+      setShowAllProjects(true);
+    }
+  };
 
   // 3D tilt bindings for interactive hover elements
   const [timelineRef, timelineInView] = useInView({ triggerOnce: true, threshold: 0.15 });
@@ -44,10 +56,6 @@ const Beranda = () => {
   const { ref: certRef, onMouseMove: certOnMouseMove, onMouseLeave: certOnMouseLeave, style: certStyle } = useTilt({ max: 6, scale: 1.02 });
 
   const { ref: heroRef, onMouseMove: heroOnMouseMove, onMouseLeave: heroOnMouseLeave, style: heroStyle } = useTilt({ max: 6, scale: 1.02 });
-  const { ref: project1Ref, onMouseMove: project1OnMouseMove, onMouseLeave: project1OnMouseLeave, style: project1Style } = useTilt({ max: 5, scale: 1.015 });
-  const { ref: project2Ref, onMouseMove: project2OnMouseMove, onMouseLeave: project2OnMouseLeave, style: project2Style } = useTilt({ max: 5, scale: 1.015 });
-  const { ref: project3Ref, onMouseMove: project3OnMouseMove, onMouseLeave: project3OnMouseLeave, style: project3Style } = useTilt({ max: 5, scale: 1.015 });
-  const { ref: project4Ref, onMouseMove: project4OnMouseMove, onMouseLeave: project4OnMouseLeave, style: project4Style } = useTilt({ max: 5, scale: 1.015 });
 
   // Handler untuk perubahan input
   const handleInputChange = (e) => {
@@ -493,6 +501,9 @@ const Beranda = () => {
               <span className="rounded-full border border-slate-600 bg-slate-700 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-slate-300">
                 Mysql
               </span>
+              <span className="rounded-full border border-slate-600 bg-slate-700 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-slate-300">
+                C++
+              </span>
             </div>
           </div>
 
@@ -564,7 +575,7 @@ const Beranda = () => {
       </div>
 
       {/* Featured Projects */}
-      <div id="projects" className="mt-16 md:mt-20 flex flex-col items-center text-center px-4">
+      <div id="projects" ref={projectsSectionRef} className="mt-16 md:mt-20 flex flex-col items-center text-center px-4">
 
         <Reveal>
           {/* Badge */}
@@ -582,265 +593,50 @@ const Beranda = () => {
           A selection of real projects showcasing full-stack web and mobile development.
         </p>
 
-        {/* Project Card */}
+        {/* 4 Initial Projects Grid */}
         <div className="mt-12 grid w-full max-w-7xl grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 animate-fadeIn delay-300">
-
-          {/* Card 1 */}
-          <div
-            ref={project1Ref}
-            onMouseMove={project1OnMouseMove}
-            onMouseLeave={project1OnMouseLeave}
-            style={project1Style}
-            data-cursor="hover"
-            className="relative rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl text-left overflow-hidden hover:border-cyan-400/50 transition-colors duration-300"
-          >
-            <div data-tilt-glare className="pointer-events-none absolute inset-0 z-10 rounded-3xl" />
-
-            {/* Gambar + Hover Overlay */}
-            <a
-              href="https://github.com/andika-x-pplg/netube"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor-text="View Code"
-              className="group relative block w-full overflow-hidden"
-            >
-              <img
-                src={netubeImage}
-                alt="Netube Application"
-                className="h-48 md:h-64 lg:h-80 w-full object-cover transition-all duration-500 ease-out group-hover:scale-110 group-hover:blur-sm"
-              />
-
-              {/* Overlay */}
-              <div className="absolute inset-0 flex items-center justify-center bg-slate-950/50 opacity-0 backdrop-blur-[2px] transition-all duration-300 group-hover:opacity-100">
-                <div className="flex flex-col items-center gap-3 text-white transition-transform duration-300 group-hover:scale-100">
-                  <FaGithub className="text-3xl md:text-4xl lg:text-5xl" />
-                  <span className="text-base md:text-lg lg:text-xl font-semibold">
-                    Netube Application
-                  </span>
-                </div>
-              </div>
-            </a>
-
-            {/* Isi Card */}
-            <div className="p-6 md:p-8">
-              <h3 className="text-xl md:text-2xl font-bold text-white">
-                Netube Application
-              </h3>
-
-              <p className="mt-3 md:mt-4 text-sm md:text-base lg:text-lg leading-relaxed text-slate-400">
-                Movie application developed with Flutter featuring authentication, Firebase
-                integration, a responsive interface, and rich movie browsing features.
-              </p>
-
-              {/* Teach */}
-              <div className="mt-4 md:mt-6 flex flex-wrap gap-2 md:gap-3">
-                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
-                  Flutter
-                </span>
-                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
-                  Firebase
-                </span>
-                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
-                  Dart
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 2 */}
-          <div
-            ref={project2Ref}
-            onMouseMove={project2OnMouseMove}
-            onMouseLeave={project2OnMouseLeave}
-            style={project2Style}
-            data-cursor="hover"
-            className="relative rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl text-left overflow-hidden hover:border-cyan-400/50 transition-colors duration-300"
-          >
-            <div data-tilt-glare className="pointer-events-none absolute inset-0 z-10 rounded-3xl" />
-
-            {/* Gambar + Hover Overlay */}
-            <a
-              href="https://github.com/andika-x-pplg/warung-nusantara"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor-text="View Code"
-              className="group relative block w-full overflow-hidden"
-            >
-              <img
-                src={WarungNusantaraImage}
-                alt="Warung Nusantara Web"
-                className="h-48 md:h-64 lg:h-80 w-full object-cover transition-all duration-500 ease-out group-hover:scale-110 group-hover:blur-sm"
-              />
-
-              {/* Overlay */}
-              <div className="absolute inset-0 flex items-center justify-center bg-slate-950/50 opacity-0 backdrop-blur-[2px] transition-all duration-300 group-hover:opacity-100">
-                <div className="flex flex-col items-center gap-3 text-white">
-                  <FaGithub className="text-3xl md:text-4xl lg:text-5xl" />
-                  <span className="text-base md:text-lg lg:text-xl font-semibold">
-                    Warung Nusantara Web
-                  </span>
-                </div>
-              </div>
-            </a>
-
-            {/* Isi Card */}
-            <div className="p-6 md:p-8">
-              <h3 className="text-xl md:text-2xl font-bold text-white">
-                Warung Nusantara Web
-              </h3>
-
-              <p className="mt-3 md:mt-4 text-sm md:text-base lg:text-lg leading-relaxed text-slate-400">
-                Modern food ordering website built with React featuring a shopping cart, dark mode,
-                responsive design, local storage persistence, category filtering, and a clean UI.
-              </p>
-
-              {/* Teach */}
-              <div className="mt-4 md:mt-6 flex flex-wrap gap-2 md:gap-3">
-                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
-                  React
-                </span>
-                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
-                  JavaScript
-                </span>
-                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
-                  CSS
-                </span>
-                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
-                  Local Storage
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 3 */}
-          <div
-            ref={project3Ref}
-            onMouseMove={project3OnMouseMove}
-            onMouseLeave={project3OnMouseLeave}
-            style={project3Style}
-            data-cursor="hover"
-            className="relative rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl text-left overflow-hidden hover:border-cyan-400/50 transition-colors duration-300"
-          >
-            <div data-tilt-glare className="pointer-events-none absolute inset-0 z-10 rounded-3xl" />
-
-            {/* Gambar + Hover Overlay */}
-            <a
-              href="https://github.com/andika-x-pplg/portofolio-react"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor-text="View Code"
-              className="group relative block w-full overflow-hidden"
-            >
-              <img
-                src={portofolioImage}
-                alt="Portofolio"
-                className="h-48 md:h-64 lg:h-80 w-full object-cover transition-all duration-500 ease-out group-hover:scale-110 group-hover:blur-sm"
-              />
-
-              {/* Overlay */}
-              <div className="absolute inset-0 flex items-center justify-center bg-slate-950/50 opacity-0 backdrop-blur-[2px] transition-all duration-300 group-hover:opacity-100">
-                <div className="flex flex-col items-center gap-3 text-white">
-                  <FaGithub className="text-3xl md:text-4xl lg:text-5xl" />
-                  <span className="text-base md:text-lg lg:text-xl font-semibold">
-                    Portfolio
-                  </span>
-                </div>
-              </div>
-            </a>
-
-            {/* Isi Card */}
-            <div className="p-6 md:p-8">
-              <h3 className="text-xl md:text-2xl font-bold text-white">
-                Portofolio
-              </h3>
-
-              <p className="mt-3 md:mt-4 text-sm md:text-base lg:text-lg leading-relaxed text-slate-400">
-                An elegant, dynamic, and simple modern portfolio.
-              </p>
-
-              {/* Teach */}
-              <div className="mt-4 md:mt-6 flex flex-wrap gap-2 md:gap-3">
-                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
-                  React
-                </span>
-                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
-                  Tailwind CSS
-                </span>
-                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
-                  JavaScript
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 4 */}
-          <div
-            ref={project4Ref}
-            onMouseMove={project4OnMouseMove}
-            onMouseLeave={project4OnMouseLeave}
-            style={project4Style}
-            data-cursor="hover"
-            className="relative rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl text-left overflow-hidden hover:border-cyan-400/50 transition-colors duration-300"
-          >
-            <div data-tilt-glare className="pointer-events-none absolute inset-0 z-10 rounded-3xl" />
-
-            {/* Gambar + Hover Overlay */}
-            <a
-              href="https://github.com/andika-x-pplg/gamevault-web"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor-text="View Code"
-              className="group relative block w-full overflow-hidden"
-            >
-              <img
-                src={gamevaultImage}
-                alt="GameVault"
-                className="h-48 md:h-64 lg:h-80 w-full object-cover transition-all duration-500 ease-out group-hover:scale-110 group-hover:blur-sm"
-              />
-
-              {/* Overlay */}
-              <div className="absolute inset-0 flex items-center justify-center bg-slate-950/50 opacity-0 backdrop-blur-[2px] transition-all duration-300 group-hover:opacity-100">
-                <div className="flex flex-col items-center gap-3 text-white">
-                  <FaGithub className="text-3xl md:text-4xl lg:text-5xl" />
-                  <span className="text-base md:text-lg lg:text-xl font-semibold">
-                    Game Vault
-                  </span>
-                </div>
-              </div>
-            </a>
-
-            {/* Isi Card */}
-            <div className="p-6 md:p-8">
-              <h3 className="text-xl md:text-2xl font-bold text-white">
-                Game Vault
-              </h3>
-
-              <p className="mt-3 md:mt-4 text-sm md:text-base lg:text-lg leading-relaxed text-slate-400">
-                GameVault is a game discovery and distribution platform inspired by modern game storefront experiences.
-              </p>
-
-              {/* Teach */}
-              <div className="mt-4 md:mt-6 flex flex-wrap gap-2 md:gap-3">
-                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
-                  React
-                </span>
-                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
-                  Tailwind CSS
-                </span>
-                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
-                  PHP
-                </span>
-                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
-                  Laravel
-                </span>
-                <span className="rounded-full border border-cyan-400/40 bg-cyan-400/5 px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm text-cyan-400">
-                  MySql
-                </span>
-              </div>
-            </div>
-          </div>
-
+          {projectsData.slice(0, 4).map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
         </div>
+
+        {/* Expandable Projects Grid with Smooth CSS Transition */}
+        {projectsData.length > 4 && (
+          <div className={`w-full max-w-7xl expandable-projects-wrapper ${showAllProjects ? 'is-expanded' : ''}`}>
+            <div className="expandable-projects-inner">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 pt-6 md:pt-8">
+                {projectsData.slice(4).map((project, idx) => (
+                  <div
+                    key={project.id}
+                    className="extra-project-item"
+                    style={{ transitionDelay: `${idx * 80}ms` }}
+                  >
+                    <ProjectCard project={project} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* See More / See Less Button */}
+        {projectsData.length > 4 && (
+          <div className="mt-10 md:mt-12 flex justify-center">
+            <button
+              type="button"
+              onClick={toggleShowProjects}
+              data-cursor="hover"
+              className="group relative inline-flex items-center gap-3 px-8 py-3.5 rounded-full border border-cyan-400/40 bg-white/5 hover:bg-cyan-500/10 text-white font-medium text-sm md:text-base backdrop-blur-xl transition-all duration-300 hover:border-cyan-400 hover:shadow-[0_0_25px_rgba(6,182,212,0.3)] hover:scale-105 cursor-pointer"
+            >
+              <span>{showAllProjects ? "Show Less" : "See More Projects"}</span>
+              <LuChevronDown
+                className={`text-lg text-cyan-400 transition-transform duration-500 ease-out ${
+                  showAllProjects ? "rotate-180" : "group-hover:translate-y-0.5"
+                }`}
+              />
+            </button>
+          </div>
+        )}
 
       </div>
 
@@ -1185,6 +981,14 @@ const Beranda = () => {
             <IoLogoIonic className='text-cyan-500 text-4xl md:text-5xl' />
             <p className="mt-3 md:mt-4 text-sm md:text-base font-medium text-slate-400">
               Ionic
+            </p>
+          </div>
+
+          {/* C++ */}
+          <div className="flex h-28 md:h-32 lg:h-36 flex-col items-center justify-center rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-[#00599c] hover:scale-105 hover:shadow-lg hover:shadow-[#00599c]/20">
+            <SiCplusplus className='text-[#00599c] text-4xl md:text-5xl' />
+            <p className="mt-3 md:mt-4 text-sm md:text-base font-medium text-slate-400">
+              C++
             </p>
           </div>
         </div>

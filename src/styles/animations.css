@@ -450,3 +450,31 @@
 .nav-link:focus-visible::after {
   width: 70%;
 }
+
+/* ============ Expandable Projects Grid Animation ============ */
+.expandable-projects-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.expandable-projects-wrapper.is-expanded {
+  grid-template-rows: 1fr;
+}
+
+.expandable-projects-inner {
+  overflow: hidden;
+}
+
+.extra-project-item {
+  opacity: 0;
+  transform: translateY(24px) scale(0.98);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.is-expanded .extra-project-item {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
