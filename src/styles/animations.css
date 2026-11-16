@@ -467,6 +467,7 @@
 }
 
 .extra-project-item {
+  height: 100%;
   opacity: 0;
   transform: translateY(24px) scale(0.98);
   transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);

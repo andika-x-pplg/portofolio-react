@@ -53,7 +53,8 @@ const Beranda = () => {
   const { ref: skill2Ref, onMouseMove: skill2OnMouseMove, onMouseLeave: skill2OnMouseLeave, style: skill2Style } = useTilt({ max: 6, scale: 1.02 });
   const { ref: skill3Ref, onMouseMove: skill3OnMouseMove, onMouseLeave: skill3OnMouseLeave, style: skill3Style } = useTilt({ max: 6, scale: 1.02 });
   const { ref: skill4Ref, onMouseMove: skill4OnMouseMove, onMouseLeave: skill4OnMouseLeave, style: skill4Style } = useTilt({ max: 6, scale: 1.02 });
-  const { ref: certRef, onMouseMove: certOnMouseMove, onMouseLeave: certOnMouseLeave, style: certStyle } = useTilt({ max: 6, scale: 1.02 });
+  const { ref: cert1Ref, onMouseMove: cert1OnMouseMove, onMouseLeave: cert1OnMouseLeave, style: cert1Style } = useTilt({ max: 6, scale: 1.02 });
+  const { ref: cert2Ref, onMouseMove: cert2OnMouseMove, onMouseLeave: cert2OnMouseLeave, style: cert2Style } = useTilt({ max: 6, scale: 1.02 });
 
   const { ref: heroRef, onMouseMove: heroOnMouseMove, onMouseLeave: heroOnMouseLeave, style: heroStyle } = useTilt({ max: 6, scale: 1.02 });
 
@@ -1013,48 +1014,91 @@ const Beranda = () => {
         <p className="mt-3 text-base md:text-lg lg:text-xl font-normal text-slate-400 animate-fadeIn delay-200">
           Proof of continuous learning across the modern development stack.
         </p>
+          
+        {/* Container for Certificate Cards */}
+        <div className='flex flex-col sm:flex-row w-full justify-center items-stretch gap-6 max-w-4xl'>
+          {/* Certificate Card 1 */}
+          <div className="mt-8 md:mt-12 flex-1 w-full max-w-sm mx-auto animate-fadeIn delay-300 flex">
 
-        {/* Certificate Card */}
-        <div className="mt-12 md:mt-16 w-full max-w-sm animate-fadeIn delay-300">
+            <div
+              ref={cert1Ref}
+              onMouseMove={cert1OnMouseMove}
+              onMouseLeave={cert1OnMouseLeave}
+              style={cert1Style}
+              data-cursor="hover"
+              className="relative w-full overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl hover:border-cyan-400/50 transition-colors duration-300 flex flex-col justify-between"
+            >
+              <div data-tilt-glare className="pointer-events-none absolute inset-0 z-10 rounded-3xl" />
 
-          <div
-            ref={certRef}
-            onMouseMove={certOnMouseMove}
-            onMouseLeave={certOnMouseLeave}
-            style={certStyle}
-            data-cursor="hover"
-            className="relative mx-auto w-full overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl hover:border-cyan-400/50 transition-colors duration-300"
-          >
-            <div data-tilt-glare className="pointer-events-none absolute inset-0 z-10 rounded-3xl" />
+              {/* Bagian Atas */}
+              <div className="flex h-48 md:h-56 lg:h-64 items-center justify-center bg-slate-900">
+                <LuAward className="text-5xl md:text-6xl text-cyan-400" />
+              </div>
 
-            {/* Bagian Atas */}
-            <div className="flex h-48 md:h-56 lg:h-64 items-center justify-center bg-slate-900">
-              <LuAward className="text-5xl md:text-6xl text-cyan-400" />
+              {/* Isi Card */}
+              <div className="p-5 md:p-6 text-left flex flex-col flex-1 justify-between">
+                <div>
+                  {/* Tahun */}
+                  <p className="text-xs md:text-sm font-medium text-cyan-300">
+                    2024
+                  </p>
+
+                  {/* Nama Sertifikat */}
+                  <h3 className="mt-2 text-lg md:text-xl font-bold text-white">
+                    LearningX
+                  </h3>
+                </div>
+
+                {/* Penerbit */}
+                <p className="mt-2 text-sm md:text-base text-slate-400">
+                  LearningX Academy
+                </p>
+              </div>
             </div>
+          </div>
 
-            {/* Isi Card */}
-            <div className="p-5 md:p-6 text-left">
+          {/* Certificate Card 2 */}
+          <div className="mt-8 md:mt-12 flex-1 w-full max-w-sm mx-auto animate-fadeIn delay-300 flex">
 
-              {/* Tahun */}
-              <p className="text-xs md:text-sm font-medium text-cyan-300">
-                2024
-              </p>
+            <div
+              ref={cert2Ref}
+              onMouseMove={cert2OnMouseMove}
+              onMouseLeave={cert2OnMouseLeave}
+              style={cert2Style}
+              data-cursor="hover"
+              className="relative w-full overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl hover:border-cyan-400/50 transition-colors duration-300 flex flex-col justify-between"
+            >
+              <div data-tilt-glare className="pointer-events-none absolute inset-0 z-10 rounded-3xl" />
 
-              {/* Nama Sertifikat */}
-              <h3 className="mt-2 text-lg md:text-xl font-bold text-white">
-                LearningX
-              </h3>
+              {/* Bagian Atas */}
+              <div className="flex h-48 md:h-56 lg:h-64 items-center justify-center bg-slate-900">
+                <LuAward className="text-5xl md:text-6xl text-cyan-400" />
+              </div>
 
-              {/* Penerbit */}
-              <p className="mt-2 text-sm md:text-base text-slate-400">
-                LearningX Academy
-              </p>
+              {/* Isi Card */}
+              <div className="p-5 md:p-6 text-left flex flex-col flex-1 justify-between">
+                <div>
+                  {/* Tahun */}
+                  <p className="text-xs md:text-sm font-medium text-cyan-300">
+                    2026
+                  </p>
 
+                  {/* Nama Sertifikat */}
+                  <h3 className="mt-2 text-lg md:text-xl font-bold text-white">
+                    Toeic
+                  </h3>
+                </div>
+
+                {/* Penerbit */}
+                <p className="mt-2 text-sm md:text-base text-slate-400">
+                  Test of English for International Communication
+                </p>
+              </div>
             </div>
-
           </div>
 
         </div>
+        
 
       </div>
 

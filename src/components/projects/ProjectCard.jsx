@@ -13,11 +13,11 @@ const ProjectCard = ({ project }) => {
       onMouseLeave={onMouseLeave}
       style={style}
       data-cursor="hover"
-      className="relative rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl text-left overflow-hidden hover:border-cyan-400/50 transition-colors duration-300 flex flex-col justify-between"
+      className="relative h-full rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl text-left overflow-hidden hover:border-cyan-400/50 transition-colors duration-300 flex flex-col justify-between"
     >
       <div data-tilt-glare className="pointer-events-none absolute inset-0 z-10 rounded-3xl" />
 
-      <div>
+      <div className="flex flex-col flex-1">
         {/* Gambar + Hover Overlay */}
         <a
           href={project.githubUrl || "#"}
@@ -52,14 +52,16 @@ const ProjectCard = ({ project }) => {
         </a>
 
         {/* Isi Card */}
-        <div className="p-6 md:p-8">
-          <h3 className="text-xl md:text-2xl font-bold text-white">
-            {project.title}
-          </h3>
+        <div className="p-6 md:p-8 flex flex-col flex-1 justify-between">
+          <div>
+            <h3 className="text-xl md:text-2xl font-bold text-white">
+              {project.title}
+            </h3>
 
-          <p className="mt-3 md:mt-4 text-sm md:text-base lg:text-lg leading-relaxed text-slate-400">
-            {project.description}
-          </p>
+            <p className="mt-3 md:mt-4 text-sm md:text-base lg:text-lg leading-relaxed text-slate-400">
+              {project.description}
+            </p>
+          </div>
 
           {/* Tech Stack Tags */}
           <div className="mt-4 md:mt-6 flex flex-wrap gap-2 md:gap-3">
